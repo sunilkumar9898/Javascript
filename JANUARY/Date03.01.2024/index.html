@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adding Content with CSS</title>
+  <style>
+    /* .example {
+      position: relative;
+    } */
+
+   div::before {
+      content: "Before Content ";
+      color: green;
+    }
+
+    .example::after {
+      content: " After Content";
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+
+  <div >Original Content</div>
+
+</body>
+</html>

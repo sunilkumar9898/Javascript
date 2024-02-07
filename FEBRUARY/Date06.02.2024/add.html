@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p id="count">0</p>
+        <button onclick="add1()" id="add" >Add++</button><br><br>
+        <button id="reduce" onclick="reduce1()">Reduce--</button>
+    </div>
+
+
+    <script>
+        let count = document.getElementById("count")
+        let val = 0;
+        // count.innerText = val;
+        function add1(){
+            val++
+        count.innerText = val
+        }
+        function reduce1(){
+            val--
+            count.innerText = val
+        }
+    </script>
+</body>
+
+</html>

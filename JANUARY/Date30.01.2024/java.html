@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JAVASCRIPT DOM</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            #main_container {
+                width: 50%;
+                margin: auto;
+
+                text-align: center;
+            }
+            #main_container div {
+                display: grid;
+                place-content: center;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main_container"></div>
+
+        <script>
+            let create_div = document.createElement("div");
+            let text = document.createElement("h1");
+            text.innerText = " HELLO JAVASCRIPT";
+            let image = document.createElement("img");
+            image.src = "./01.avif";
+            create_div.append(text, image);
+            let main_container = document.getElementById("main_container");
+            main_container.append(create_div);
+        </script>
+    </body>
+</html>

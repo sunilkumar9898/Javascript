@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Of Table </title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+
+        }
+        form{
+            width: 40%;
+            margin: auto;
+            background-color: aqua;
+            padding: 50px 10px;
+            text-align: center;
+        }
+        input{
+            width: 50%;
+            padding: 10px 15px;
+        }
+        button{
+            padding: 10px 15px;
+            border: none;
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<form >
+Name :    <input type="text" id="name" placeholder="Please enter your Name" required><br><br>
+Email :    <input type="email" id="email" placeholder="Please Enter Your EmailAddress" required><br><br>
+Number :    <input type="text" id="phone" placeholder="Please Enter Your contact Number" required><br><br>
+City :    <input type="city" id="city" placeholder="Please Enter Your City Name" required><br><br>
+    <button type="submit">Submit</button>
+</form>
+<table id="table_data" border="1"></table>
+
+<script>
+    let data = JSON.parse(localStorage.getItem("storeData")) || [];
+    console.log(data);
+let form  = document.querySelector("form");
+form.addEventListener("submit",getValue);
+
+function getValue(e){
+e.preventDefault()
+let bag = {
+         name : document.getElementById("name").value,
+      email : document.getElementById("email").value,
+      phone : document.getElementById("phone").value,
+      city : document.getElementById("city").value
+}
+data.push(bag)
+localStorage.setItem("storeData" , JSON.stringify(data))
+form.reset()
+}
+
+
+
+ 
+
+</script>
+</body>
+</html>

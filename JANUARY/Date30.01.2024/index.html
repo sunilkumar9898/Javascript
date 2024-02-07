@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div class="h1" >
+        <h1 class="heading">Hello From</h1>
+        <h1 class="heading">Hello From</h1>
+        <h1 class="heading">Hello From</h1>
+        <h1 class="heading">Hello From</h1>
+        <h1 class="heading">Hello From</h1>
+        <h1 class="heading">Hello From</h1>
+        <h1 class="heading">Hello From</h1>
+        <h1 class="heading">Hello From</h1>
+        <h1 class="heading">Hello From</h1>
+
+    </div> -->
+
+<!-- Qs.1  Create a
+H2 heading element with text - “Hello JavaScript”. And this “from Jaipur
+police” to this text using JS. -->
+
+<h2 id="h2">Hello Javascript</h2>
+
+
+<!--
+Qs.2 Create 3 divs with common class name - “box”.
+Access them & add some unique text to Each of them. -->
+
+<div class="box">Unique Text</div>
+<div class="box">Unique Text</div>
+<div class="box">Unique Text</div>
+
+
+
+
+
+
+    <script>
+        // let data = document.querySelectorAll(".heading")
+        // let count = 0;
+        // let value = data.forEach((newvalue,index)=>{
+
+        //     if(index%2==0){
+        //         count++
+        //         newvalue.innerText += " i Am " +count
+        //     }else if(index%2==1){
+        //         count++
+        //         newvalue.innerText += " i Am "+count
+        //     }
+
+        // });
+
+
+        //     let data = document.querySelectorAll(".heading")
+        // let text = " I am from johan";
+        // let value = data.forEach((newvalue,index)=>{
+        //     index++
+        //     newvalue.innerText+= " " +text+ " "+ index;
+
+        // });
+
+
+
+
+// Q:1
+
+
+let a = document.querySelectorAll("#h2");
+console.log(a);
+
+
+  a.forEach((value,index)=>{
+    value.innerText+= " " +"from jaipur police"
+  })
+
+//   Q:2
+
+
+let c = document.querySelectorAll(".box");
+console.log(c);
+ c.forEach((value,index)=>{
+    index++
+    value.innerText += " " + "box" + " "+ index
+ })
+
+
+
+    </script>
+</body>
+</html>

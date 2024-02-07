@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Create By JAvascript DOM</title>
+    <style>
+        table{
+            width: 50%;
+            margin:100px auto;
+        }
+        th{
+            text-transform: uppercase;
+        }
+        tr th{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<table id="table_data" border="1">
+
+</table>
+
+<script>
+    let thead = document.createElement("thead");
+    let tr = document.createElement("tr");
+    let th1 = document.createElement("th")
+    th1.innerText = "SR. NO"
+    let th2 = document.createElement("th")
+    th2.innerText = "Name"
+    let th3 = document.createElement("th")
+    th3.innerText = "Mobile"
+    let th4 = document.createElement("th")
+    th4.innerText = "City"
+    let th5 = document.createElement("th")
+    th5.innerText = "Status"
+
+
+
+    let tr1 = document.createElement("tr");
+    let td1 = document.createElement("th")
+    td1.innerText = "1"
+    let td2 = document.createElement("th")
+    td2.innerText = "Manjeet"
+    let td3 = document.createElement("th")
+    td3.innerText = "8956236589"
+    let td4 = document.createElement("th")
+    td4.innerText = "Jaipur"
+    let td5 = document.createElement("th")
+    td5.innerText = "Incomplete"
+        if(td5.innerText="completed"){
+        td5.style.color="white"
+        td5.style.background="red"
+    }
+
+
+
+        let tr2 = document.createElement("tr");
+    let td6 = document.createElement("th")
+    td6.innerText = "2"
+    let td7 = document.createElement("th")
+    td7.innerText = "Sunil"
+    let td8 = document.createElement("th")
+    td8.innerText = "7895654455"
+    let td9 = document.createElement("th")
+    td9.innerText = "Sikar"
+    let td10 = document.createElement("th")
+    td10.innerText = "completed"
+            if(td10.innerText="incompleted"){
+        td10.style.color="white"
+        td10.style.background="green"
+    }
+
+        let tr3 = document.createElement("tr");
+    let td11 = document.createElement("th")
+    td11.innerText = "3"
+    let td12 = document.createElement("th")
+    td12.innerText = "Ramu Singh"
+    let td13 = document.createElement("th")
+    td13.innerText = "789568899"
+    let td14 = document.createElement("th")
+    td14.innerText = "Dausa"
+    let td15 = document.createElement("th")
+    td15.innerText = "completed"
+            if(td10.innerText="completed"){
+        td15.style.color="white"
+        td15.style.background="pink"
+    }
+
+
+            let tr4 = document.createElement("tr");
+    let td16 = document.createElement("th")
+    td16.innerText = "4"
+    let td17 = document.createElement("th")
+    td17.innerText = "Pooja"
+    let td18 = document.createElement("th")
+    td18.innerText = "890058129"
+    let td19 = document.createElement("th")
+    td19.innerText = "Bundi"
+    let td20 = document.createElement("th")
+    td20.innerText = "incompleted"
+            if(td10.innerText="incompleted"){
+        td20.style.color="white"
+        td20.style.background="blue"
+    }
+
+
+                let tr5 = document.createElement("tr");
+    let td21 = document.createElement("th")
+    td21.innerText = "5"
+    let td22 = document.createElement("th")
+    td22.innerText = "Mahesh"
+    let td23 = document.createElement("th")
+    td23.innerText = "96660554455"
+    let td24 = document.createElement("th")
+    td24.innerText = "Alwar"
+    let td25 = document.createElement("th")
+    td25.innerText = "completed"
+            if(td10.innerText="completed"){
+        td25.style.color="white"
+        td25.style.background="orange"
+    }
+
+    tr.append(th1,th2,th3,th4,th5);
+    tr1.append(td1,td2,td3,td4,td5)
+    tr2.append(td6,td7,td8,td9,td10)
+    tr3.append(td11,td12,td13,td14,td15)
+    tr4.append(td16,td17,td18,td19,td20)
+    tr5.append(td21,td22,td23,td24,td25)
+    thead.append(tr,tr1,tr2,tr3,tr4,tr5);
+    let table_data = document.getElementById("table_data")
+    table_data.append(thead)
+</script>
+</body>
+</html>

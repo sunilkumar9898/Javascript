@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Of Table </title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+
+        }
+        form{
+            width: 40%;
+            margin: auto;
+            background-color: aqua;
+            padding: 50px 10px;
+            text-align: center;
+        }
+        input{
+            width: 50%;
+            padding: 10px 15px;
+        }
+        button{
+            padding: 10px 15px;
+            border: none;
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<form >
+    <input type="text" id="name" placeholder="Please enter your Name"><br><br>
+    <input type="email" id="email" placeholder="Please Enter Your EmailAddress"><br><br>
+    <input type="number" id="phone" placeholder="Please Enter Your contact Number"><br><br>
+    <button type="submit">Submit</button>
+</form>
+<table id="table_data" border="1"></table>
+
+<script>
+    let newData = JSON.parse(localStorage.getItem("formData")) || [];
+
+    let form = document.querySelector("form");
+    form.addEventListener("submit",myfunction);
+
+    function myfunction(event){
+        event.preventDefault();
+        let data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value
+        }
+
+
+        newData.push(data);
+        localStorage.setItem("formData" ,JSON.stringify(newData))
+        showData(newData)
+        form.reset()
+
+    }
+console.log(newData);
+
+
+
+//    cerate table
+
+let thead = document.createElement("thead");
+    let tbody = document.createElement("tbody");
+let tr = document.createElement("tr");
+let th = document.createElement("th");
+th.innerText="Name";
+let th1 = document.createElement("th");
+th1.innerText = "Email Address";
+let th2 = document.createElement("th");
+th2.innerText = "Contact Number"
+
+tr.append(th,th1,th2);
+thead.append(tr);
+
+
+
+function showData(show1){
+    tbody.innerHTML = "";
+    show1.map((item,index)=>{
+
+        index++
+        let tr1 = document.createElement("tr");
+        let td = document.createElement("td");
+        td.innerText = item.name;
+        let td1 = document.createElement("td");
+        td1.innerText = item.email;
+        let td2 = document.createElement("td");
+        td2.innerText = item.phone;
+        tr1.append(td,td1,td2);
+        tbody.append(tr1);
+
+    });
+
+}
+    let table_data = document.getElementById("table_data");
+                table_data.append(thead,tbody);
+      showData(newData)
+</script>
+</body>
+</html>

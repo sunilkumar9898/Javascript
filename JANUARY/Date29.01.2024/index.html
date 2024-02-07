@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="heading">
+            <h1>hello from javascript</h1>
+        </div>
+        <div class="child">
+            <p class="item1"><span>child 1 hello 1</span></p>
+            <p class="item1">child 2 hello 2</p>
+            <p class="item1">child hello 3</p>
+        </div>
+        <div class="child">
+            <p class="item4">child 4</p>
+            <p class="item2">child 5</p>
+            <p class="item3">child 6</p>
+        </div>
+        <div class="child">
+            <p class="item4">child 4</p>
+            <p class="item2">child 5</p>
+            <p class="item3">child 6</p>
+        </div>
+        <div class="child">
+            <p class="item4">child 4</p>
+            <p class="item2">child 5</p>
+            <p class="item3">child 6</p>
+        </div>
+        <div class="child">
+            <p class="item1"><span>child 1 hello 1</span></p>
+            <p class="item1">child 2 hello 2</p>
+            <p class="item1">child hello 3</p>
+        </div>
+        <div class="child">
+            <p class="item4">child 4</p>
+            <p class="item2">child 5</p>
+            <p class="item3">child 6</p>
+        </div>
+        <div class="child">
+            <p class="item4">child 4</p>
+            <p class="item2">child 5</p>
+            <p class="item3">child 6</p>
+        </div>
+        <div class="child">
+            <p class="item4">child 4</p>
+            <p class="item2">child 5</p>
+            <p class="item3">child 6</p>
+        </div>
+    </body>
+    <script>
+        let value = document.querySelectorAll("div");
+        // console.log(value)
+        // let newValue1=value[2].style.color="green"
+        //  newValue1=value[2].style.background="cyan"
+        // let newValue2=value[1].innerText
+        //  console.log(value)
+        // let index=1
+        // for(newvalue of value){
+        // // console.log(newvalue);
+
+        //     if(index==1){
+        //      let data=newvalue.innerText
+        //      console.log(data);
+        //    newvalue.style.color="green"
+        //    newvalue.style.fontSize="50px"
+        //     }else if(index==2){
+        //    newvalue.style.color="red"
+        //     }else if(index==3){
+        //    newvalue.style.color="cyan"
+        //     }else if(index==4){
+        //    newvalue.style.color="blue"
+        //     }else{
+        //          newvalue.style.color="pink"
+        //     }
+        // index++
+        // }
+        // console.log(value)
+
+        // console.log(newValue2)
+        let data = value.forEach((newvalue, index) => {
+            // console.log(newValue,index);
+            if (index % 2 == 0) {
+                newvalue.style.color = "green";
+                newvalue.style.background = "yellow";
+                newvalue.style.fontSize = "50px";
+                newvalue.innerText="I am sunil kumar jaipur police headquarters"
+            } else if (index % 2 == 1) {
+                newvalue.style.color = "red";
+                newvalue.style.fontSize = "20px";
+                newvalue.style.background = "pink";
+                    newvalue.innerText="I am Manjeet kumar jaipur police headquarters"
+            } else if (index == 2) {
+                newvalue.style.color = "cyan";
+            } else if (index == 3) {
+                newvalue.style.color = "blue";
+            } else {
+                newvalue.style.color = "teal";
+                newvalue.style.fontSize = "20px";
+                newvalue.style.background = "cyan";
+            }
+        });
+    </script>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Entry In Table From Form </title>
+    <style>
+                * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+
+            }
+
+            form {
+                width: 40%;
+                padding: 20px 0px;
+                margin: 80px auto;
+                text-align: center;
+                background-image: linear-gradient(
+                    to right top,
+                    #051937,
+                    #004d7a,
+                    #008793,
+                    #00bf72,
+                    #a8eb12
+                );
+            }
+            input {
+                width: 80%;
+                padding: 10px;
+            }
+            button {
+                padding: 15px 40px;
+                background-color: green;
+                border: none;
+                color: white;
+                cursor: pointer;
+            }
+
+            .form_heading {
+                padding: 30px 0px;
+                color: rgb(248, 252, 248);
+                font-size: 40px;
+            }
+            table{
+                width: 60%;
+                margin: auto;
+                border-collapse: collapse;
+                text-align: center;
+                color: rgb(9, 0, 0);
+                border-radius: 10px;
+                overflow: hidden;
+
+            }
+            #thead tr{
+                background-color: rgb(255, 149, 0);
+                font-size: 25px;
+                font-weight: bold;
+
+            }
+            tr ,td ,th{
+                padding: 10px;
+            }
+            table tr:nth-child(odd){
+                background-color: rgba(0, 128, 0, 0.615);
+            }
+            table tr:nth-child(even){
+                background-color: rgba(231, 7, 231, 0.463);
+            }
+    </style>
+</head>
+<body>
+        <form>
+            <h1 class="form_heading">Application Form</h1>
+            <input
+                type="text"
+                id="name"
+                placeholder="Please enter name" /><br /><br />
+            <input
+                type="text"
+                id="fname"
+                placeholder="please enter Father's Name" /><br /><br />
+            <input
+                type="text"
+                id="city"
+                placeholder="please enter City" /><br /><br />
+            <input
+                type="text"
+                id="state"
+                placeholder="Please enter state" /><br /><br />
+            <button type="submit">Submit</button>
+        </form>
+
+            <table border="1" >
+                <thead id="thead">
+                    <tr>
+                        <th>Name</th>
+                        <th>Father's Name</th>
+                        <th>City</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+
+
+
+            <script>
+                let data = JSON.parse(localStorage.getItem("tabledata")) || [];
+                console.log(data);
+                let form  = document.querySelector("form");
+                form.addEventListener("submit" , myfun);
+
+                function myfun(e){
+                    e.preventDefault()
+
+                    let obj={
+                        name:document.getElementById("name").value,
+                        fname:document.getElementById("fname").value,
+                        city:document.getElementById("city").value,
+                        state:document.getElementById("state").value
+                    }
+                    if (
+                    obj.name == "" ||
+                    obj.Fname == "" ||
+                    obj.city == "" ||
+                    obj.state == ""
+                )
+                 {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Please enter Form Details",
+
+                    });
+                    return
+
+                } else {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Data Submitted Successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+
+                    data.push(obj)
+                    showtable(data)
+                    localStorage.setItem("tabledata", JSON.stringify(data))
+                    form.reset()
+                }
+
+                let tbody = document.getElementById("tbody")
+
+                function showtable(data1){
+                    tbody.innerHTML = " "
+                    data1.map((item,index)=>{
+                        let tr = document.createElement("tr");
+                        let name= document.createElement("td");
+                        name.innerText = item.name;
+                        let fname= document.createElement("td");
+                        fname.innerText = item.fname;
+                        let city= document.createElement("td");
+                        city.innerText = item.city;
+                        let state= document.createElement("td");
+                        state.innerText =item.state;
+                        tr.append(name,fname,city,state)
+                        tbody.append(tr)
+                    })
+                }
+                showtable(data)
+
+            </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>

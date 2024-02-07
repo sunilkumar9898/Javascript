@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            form {
+                width: 50%;
+                margin: auto;
+                background-color: antiquewhite;
+                padding: 50px 0px;
+                text-align: center;
+            }
+            input {
+                margin: auto;
+                width: 50%;
+                gap: 50px;
+                padding: 10px;
+            }
+            button {
+                padding: 10px 15px;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            <input
+                type="text"
+                id="name"
+                placeholder="please enter your name" /><br /><br />
+            <input
+                type="text"
+                id="email"
+                placeholder="please enter your Email" /><br /><br />
+            <select id="course">
+                <option value="">Select Course</option>
+                <option value="Html">HTML</option>
+                <option value="Css">CSS</option></select
+            ><br /><br />
+            <input
+                type="number"
+                id="contact"
+                placeholder="please enter your Phone Number" /><br /><br />
+            <button type="submit">Submit</button>
+        </form>
+        <hr />
+        <table id="table_data" border="1"></table>
+        <script>
+            let allData = JSON.parse(localStorage.getItem("studentData")) || [];
+
+
+            let form = document.querySelector("form");
+            form.addEventListener("submit", getvalue);
+
+            function getvalue(event) {
+                event.preventDefault();///use for to prevent default behaviour of form
+                let data = {
+                    name: document.getElementById("name").value,
+                    contact: document.getElementById("contact").value,
+                    course: document.getElementById("course").value,
+                    email: document.getElementById("email").value,
+                };
+                allData.push(data);///push all data into array
+                localStorage.setItem("studentData", JSON.stringify(allData));///store data into localStorage
+                displayData(allData);///call display function to show data without reload the page
+                form.reset();///reset input fields when submit form value
+            }
+///create table head
+            let thead = document.createElement("thead");
+            let tbody = document.createElement("tbody");
+            let tr = document.createElement("tr");
+            let th1 = document.createElement("th");
+            th1.innerText = "Sr.No";
+            let th2 = document.createElement("th");
+            th2.innerText = "Name";
+            let th3 = document.createElement("th");
+            th3.innerText = "Email";
+            let th4 = document.createElement("th");
+            th4.innerText = "Course";
+            let th5 = document.createElement("th");
+            th5.innerText = "Mobile";
+            tr.append(th1, th2, th3, th4, th5);
+            thead.append(tr);
+// create display data function for displaying all datas
+            function displayData(data) {
+                tbody.innerHTML=""
+                data.map((item, index) => {
+                    index++;
+                    let tr1 = document.createElement("tr");
+                    let td1 = document.createElement("td");
+                    td1.innerText = index;
+                    let td2 = document.createElement("td");
+                    td2.innerText = item.name;
+                    let td3 = document.createElement("td");
+                    td3.innerText = item.email;
+                    let td4 = document.createElement("td");
+                    td4.innerText = item.course;
+                    let td5 = document.createElement("td");
+                    td5.innerText = item.contact;
+
+                    tr1.append(td1, td2, td3, td4, td5);
+                    tbody.append(tr1);
+
+                });
+
+                let table_data = document.getElementById("table_data");
+                table_data.append(thead, tbody);
+            }
+            console.log(allData.length,110);
+if(allData.length<0?`<h1>No Data Available</h1>`:displayData(allData));
+
+        </script>
+    </body>
+</html>

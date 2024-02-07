@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .animated-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(to right, #FF5252, #FFD600, #4CAF50, #2196F3, #9C27B0);
+            color: white;
+            animation: blur 3s linear infinite;
+        }
+
+        .animated-button:hover {
+            background-size: 200% 200%;
+            background-position: right bottom;
+        }
+
+
+        @keyframes blur  {
+            0%{
+                background: linear-gradient(to right, #FF5252, #FFD600, #4CAF50, #2196F3, #9C27B0); 
+            }
+            50%{
+                background: linear-gradient(to left, #4a0247, #020202, #e6a305, #62032f, #2c0732);
+            }
+            100%{
+                background: linear-gradient(to right, #0c04e8, #07afd4, #0be212, #0d1216, #9C27B0);
+            }
+            
+        }
+
+    div{
+            font-size: 80px;
+            animation: heart 0.5s linear infinite;
+            width: fit-content;
+        }
+        @keyframes heart {
+            0%{
+                transform: scale(.75);opacity: .75;
+            }
+            50%{
+                transform: scale(1);opacity: 1;
+            }
+            100%{
+                transform: scale(.75);opacity: .75;
+            }
+        }
+
+        li{
+            display: table-cell;
+            justify-content: space-between;
+            margin: auto;
+            position: relative;
+            padding: 15px 0px;
+            /* background-color: black; */
+            width: 100%;
+        }
+        a{
+            /* color: white; */
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            display: inline-block;
+            padding: 15px 20px;
+            position: relative;
+            
+
+        }
+        a:hover::after{
+            transition: all .5s ease-out;
+            content: "";
+    border: 2px solid red;
+    background-origin: inherit;
+    width: 80%;
+    bottom: 0;
+    left: 0; /* Adjust the value to set the distance from the bottom */
+    position: absolute; 
+    /* Add this line to position the border absolutely */
+    color: red;
+        }
+        a:hover::after {
+    width: 80%; /* Set the target width on hover */
+}
+    </style>
+</head>
+<body>
+    <li><a href="#">Home</a>
+       <a href="#">About</a>       
+       <a href="#">Contact</a>       
+       <a href="#">Service</a></li>
+<!-- <div>❤️</div> -->
+<!-- <button class="animated-button">Hover me</button> -->
+<script src="index.js"></script>
+</body>
+</html>
+
+

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Javascript DOM</title>
+        <style>
+            div {
+                width: 20%;
+                margin: auto;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            }
+            form {
+                width: 100%;
+            }
+            input {
+                width: 97%;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <form>
+                <input
+                    type="text"
+                    id="name"
+                    value="manjeet"
+                    placeholder="Enter Your Name " /><br /><br />
+                <input
+                    type="text"
+                    id="father"
+                    value="ummed singh"
+                    placeholder="Enter Your Father's Name" /><br /><br />
+                <input
+                    type="text"
+                    id="mother"
+                    value="sdff"
+                    placeholder="Enter Your Mother's Name" /><br /><br />
+                <input
+                    type="text"
+                    id="city"
+                    value="jaipur"
+                    placeholder="Enter Your City Name " /><br /><br />
+                <input
+                    type="text"
+                    id="collage"
+                    value="jaipur univercity"
+                    placeholder="Enter Your Collage Name " /><br /><br />
+                <button type="submit">Submit</button>
+            </form>
+            <script>
+                let name = document.getElementById("name").value;
+                let Father = document.getElementById("father").value;
+                let Mother = document.getElementById("mother").value;
+                let city = document.getElementById("city").value;
+                let collage = document.getElementById("collage").value;
+                let obj = {
+                    name,
+                    Father,
+                    Mother,
+                    city,
+                    collage,
+                };
+                let arr = [];
+                arr.push(obj);
+                console.log(name, Father, Mother, city, collage);
+                console.log(obj);
+                console.log(arr);
+            </script>
+        </div>
+    </body>
+</html>

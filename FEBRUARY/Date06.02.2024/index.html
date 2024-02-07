@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form Data Print In Card By Javascript</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+
+            }
+
+            form {
+                width: 40%;
+                padding: 20px 0px;
+                margin: 80px auto;
+                text-align: center;
+                background-image: linear-gradient(
+                    to right top,
+                    #051937,
+                    #004d7a,
+                    #008793,
+                    #00bf72,
+                    #a8eb12
+                );
+            }
+            input {
+                width: 80%;
+                padding: 10px;
+            }
+            button {
+                padding: 15px 40px;
+                background-color: green;
+                border: none;
+                color: white;
+                cursor: pointer;
+            }
+            #container {
+                width: 90%;
+                margin: auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 50px;
+            }
+            #container div {
+                width: 100%;
+                text-align: center;
+                line-height: 28px;
+                padding: 50px;
+                background-color: lightblue;
+                border-radius: 4px 30px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                cursor: pointer;
+                background: #c541a6;
+                background: conic-gradient(from 315deg, #c541a688, #fe010175);
+
+            }
+            h1 {
+                color: green;
+            }
+            h2 {
+                color: rgb(255, 26, 0);
+            }
+            h3 {
+                color: rgb(17, 17, 17);
+            }
+            h4 {
+                color: rgb(3, 24, 255);
+            }
+            .form_heading {
+                padding: 30px 0px;
+                color: rgb(248, 252, 248);
+                font-size: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            <h1 class="form_heading">Application Form</h1>
+            <input
+                type="text"
+                id="name"
+                placeholder="Please enter name" /><br /><br />
+            <input
+                type="text"
+                id="email"
+                placeholder="please enter Father's Name" /><br /><br />
+            <input
+                type="text"
+                id="city"
+                placeholder="please enter City" /><br /><br />
+            <input
+                type="text"
+                id="state"
+                placeholder="Please enter state" /><br /><br />
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="container"></div>
+
+        <script>
+            let allData = JSON.parse(localStorage.getItem("formData")) || [];
+            console.log(allData);
+            let form = document.querySelector("form");
+            form.addEventListener("submit", myfunction);
+
+            function myfunction(e) {
+                e.preventDefault();
+                let data = {
+                    name: document.getElementById("name").value,
+                    Fname: document.getElementById("email").value,
+                    city: document.getElementById("city").value,
+                    state: document.getElementById("state").value,
+                };
+                if (
+                    data.name == "" ||
+                    data.Fname == "" ||
+                    data.city == "" ||
+                    data.state == ""
+                )
+                 {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Please enter Form Details",
+                        footer: '<a href="#">Why do I have this issue?</a>',
+                    });
+                    return
+
+                } else {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Data Submitted Successfully",
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                }
+
+                allData.push(data);
+                showData(allData);
+                localStorage.setItem("formData", JSON.stringify(allData));
+                form.reset();
+            }
+
+
+            // show data function
+            let container = document.getElementById("container");
+            function showData(data) {
+                container.innerHTML = " ";
+                data.map((item, inde) => {
+
+                    let card = document.createElement("div");
+                    let name = document.createElement("h1");
+                    name.innerText = item.name;
+                    let email = document.createElement("h2");
+                    email.innerText = item.Fname;
+                    let city = document.createElement("h3");
+                    city.innerText = item.city;
+                    let state = document.createElement("h4");
+                    state.innerText = item.state;
+                    card.append(name, email, city, state);
+                    container.append(card);
+
+                });
+            }
+            showData(allData);
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </body>
+</html>
