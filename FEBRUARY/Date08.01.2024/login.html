@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        form{
+            width: 40%;
+            padding: 20px;
+            background-color: lightblue;
+            margin:50px auto;
+        }
+        input{
+            width: 90%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        button{
+            padding: 10px 15px;
+            display: grid;
+            place-content: center;
+        }
+    </style>
+</head>
+<body>
+    <form >
+        <h1>Login Form</h1>
+        <p>Name</p>
+        <input type="text" id="name" placeholder="Please enter name">
+        <p>Email</p>
+        <input type="email" id="email" placeholder="Please enter name"><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+
+
+
+
+
+
+    <script>
+        let form = document.querySelector("form");
+        form.addEventListener("submit" , login)
+        let value = JSON.parse(localStorage.getItem("registerData"));
+        console.log(value);
+
+
+        function login(){
+        value.map((item,index)=>{
+
+
+
+            if((item.name==document.getElementById("name").value) && (item.email==document.getElementById("email").value) ){
+                    alert("login succefully")
+
+            }
+        })
+                alert("login failed")
+
+        }
+    </script>
+</body>
+</html>

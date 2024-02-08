@@ -31,7 +31,7 @@
             name:"Ramu Singh",
             school:"DPS"
         },
-        
+
             {
             name:"rakesh",
             school:"DPS"
@@ -43,15 +43,16 @@
     ]
 
     localStorage.setItem("value",JSON.stringify(arr));
-  let a =JSON.parse(localStorage.getItem("value"))
-   console.log(a);
-    // let obj=arr;
+    let a =JSON.parse(localStorage.getItem("value"))
+    console.log(a);
     a.map((item,index)=>{
     if(item.name=="sunil"){
         item.name="manjeet"
          localStorage.setItem("value",JSON.stringify(a));
     }
     })
+
+
   let b =JSON.parse(localStorage.getItem("value"))
   console.log(b , "47");
 

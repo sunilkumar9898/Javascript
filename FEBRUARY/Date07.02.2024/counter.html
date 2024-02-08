@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD Reduce Value</title>
+</head>
+<body>
+    <div>
+        <p id="count">0</p>
+        <button id="add1" >Add++</button>
+        <button id="reduce" onclick="reduce()">Reduce--</button>
+    </div>
+
+
+
+    <script>
+        let count = document.getElementById("count");
+        let add1 = document.getElementById("add1").addEventListener("click",add)
+        let value = 0;
+        function add() {
+            value++
+            count.innerText = value;
+        }
+
+        function reduce(){
+            value--
+            count.innerText = value;
+        }
+    </script>
+</body>
+</html>
+
+
