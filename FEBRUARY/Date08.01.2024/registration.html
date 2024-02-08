@@ -1,68 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Registration Form</title>
 
-    <style>
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        form{
-            width: 40%;
-            padding: 20px;
-            background-color: lightblue;
-            margin:50px auto;
-        }
-        input{
-            width: 90%;
-            padding: 10px;
-            margin-top: 5px;
-        }
-        button{
-            padding: 10px 15px;
-            display: grid;
-            place-content: center;
-        }
-    </style>
-</head>
-<body>
-    <form >
-        <p>Name</p>
-        <input type="text" id="name" placeholder="Please enter name">
-        <p>Email</p>
-        <input type="email" id="email" placeholder="Please enter name">
-        <p>Mobile</p>
-        <input type="number" id="mobile" placeholder="Please enter your Mobile number"><br><br>
-        <button type="submit">Submit</button>
-    </form>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            form {
+                width: 40%;
+                padding: 20px;
+                background: rgb(180, 34, 195);
+                background: linear-gradient(
+                    360deg,
+                    rgba(180, 34, 195, 1) 0%,
+                    rgba(253, 181, 45, 0.9136029411764706) 100%
+                );
+                margin: 50px auto;
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+                    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+                    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+                    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+                    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+                border-radius: 15px;
+            }
+            input {
+                width: 90%;
+                padding: 10px;
+                margin-top: 5px;
+            }
+            button {
+                padding: 10px 15px;
+                display: grid;
+                place-content: center;
+            }
+            h1 {
+                text-align: center;
+                padding: 20px 0px;
+                color: indigo;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            <h1>Registration</h1>
+            <p>Name</p>
+            <input type="text" id="name" placeholder="Please enter name" />
+            <p>Email</p>
+            <input type="email" id="email" placeholder="Please enter name" />
+            <p>Mobile</p>
+            <input
+                type="number"
+                id="mobile"
+                placeholder="Please enter your Mobile number" /><br /><br />
+            <button type="submit">Submit</button><br /><br /><br />
 
+            <button><a href="./login.html">Click Here For Login </a></button>
+        </form>
 
+        <script>
+            let data = JSON.parse(localStorage.getItem("registerData")) || [];
+            let form = document.querySelector("form");
+            form.addEventListener("submit", myfun);
 
+            function myfun(event) {
+                event.preventDefault();
+                let storeData = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    number: document.getElementById("mobile").value,
+                };
 
+                if (
+                    storeData.name == "" ||
+                    storeData.email == "" ||
+                    storeData.number == ""
+                ) {
+                    alert("please enter all Details");
+                    return;
+                } else {
+                    alert("success");
+                }
 
-
-
-    <script>
-        let data = JSON.parse(localStorage.getItem("registerData")) || []
-    let form=document.querySelector("form")
-    form.addEventListener("submit" , myfun);
-
-    function myfun(event){
-        event.preventDefault()
-        let storeData={
-            name:document.getElementById("name").value,
-            email:document.getElementById("email").value,
-            number:document.getElementById("mobile").value,
-        }
-        data.push(storeData);
-        localStorage.setItem("registerData" ,JSON.stringify(data))
-        form.reset()
-        console.log(data);
-    }
-    </script>
-</body>
+                data.push(storeData);
+                localStorage.setItem("registerData", JSON.stringify(data));
+                form.reset();
+                console.log(data);
+            }
+        </script>
+    </body>
 </html>

@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header{
+    display: flex;
+    width: 100%;
+    background-color: #fff;
+    justify-content: space-around;
+    align-items: center;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.log0{
+width: 5%;
+}
+.logo img{
+    width:100%;
+    aspect-ratio: 2/1.5;
+
+}
+.nav{
+    width: 45%;
+    display: flex;
+    justify-content: space-around;
+}
+.nav a{
+    color: black;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 19px;
+}
+.toggle_icon{
+    visibility: hidden;
+}
