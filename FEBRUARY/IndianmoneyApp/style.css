@@ -9,6 +9,7 @@ header{
     background-color: #fff;
     justify-content: space-around;
     align-items: center;
+    padding: 5px 0px;
 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -16,8 +17,8 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 width: 5%;
 }
 .logo img{
-    width:100%;
-    aspect-ratio: 2/1.5;
+    width:50%;
+    aspect-ratio: 2/1.1;
 
 }
 .nav{
@@ -30,7 +31,159 @@ width: 5%;
     text-decoration: none;
     font-weight: 800;
     font-size: 19px;
+    transition: .2s ease-out;
+}
+.nav a:hover{
+    text-shadow: 0px 1px 0px black;
+    transform: translateY(-2px);
 }
 .toggle_icon{
     visibility: hidden;
+}
+
+.container{
+    /* background-image: linear-gradient(to bottom, rgb(164, 188, 241), rgb(170, 184, 170)); */
+    padding: 40px 0px;
+}
+
+.main_section{
+    width: 90%;
+    background-color: rgba(5, 66, 232, 0.8);
+    margin: auto;
+    border-radius: 5px;
+}
+.main_content{
+    text-align: center;
+    color: white;
+    padding: 100px 0px;
+    line-height: 28px;
+}
+.main_content button{
+    padding: 12px 30px ;
+    margin-top: 10px;
+    background-color: rgb(0, 238, 255);
+    border: none;
+    color: rgb(10, 1, 1);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+.main_content button:hover{
+    transform: translateY(-10deg);
+    box-shadow: rgb(9, 9, 9) 5px 10px 15px;
+}
+
+
+.cards{
+    width: 90%;
+    margin: auto;
+    padding: 12px 0px;
+}
+
+
+#cards{
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(180px ,1fr));
+
+}
+.cards h1{
+    padding: 13px;
+}
+.card{
+background-color: rgb(254, 254, 254);
+border-radius: 8px;
+padding: 10px 25px 20px 20px;
+box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+cursor: pointer;
+transition: .3s ease-in-out;
+}
+.card:hover{
+transform: translateY(-5px);
+box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+}
+
+.card  img{
+    border-radius: 50%;
+    width: 35%;
+    aspect-ratio: 1/1;
+}
+.card p{
+    margin-top: 25px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.Chrges{
+width: 90%;
+margin: auto;
+}
+.Chrges h1{
+ font-size: 25px;
+ padding: 15px 0px;
+ font-weight: 700;
+}
+.Chrges h2{
+ font-size: 25px;
+ padding: 1px 0px 15px 0px;
+ font-weight: 700;
+}
+.carge_card{
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(350px ,1fr));
+}
+
+.chares_card{
+box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+text-align: center;
+padding: 30px;
+cursor: pointer;
+transition: .3s ease-out;
+
+}
+.chares_card:hover{
+    transform: translateY(-10px);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
+}
+.chares_card img{
+    width: 90px;
+}
+.chares_card h3{
+    padding: 10px 0px;
+}
+.chares_card p{
+    padding: 20px 0px;
+    font-size: 18px;
+    font-weight: 550;
+}
+
+.Chrges h4{
+ font-size: 25px;
+ padding: 25px 0px;
+ font-weight: 700;
+}
+
+
+
+@media  (min-width:220px) and (max-width:420px) {
+
+.nav{
+    display: none;
+}
+.toggle_icon{
+    visibility: visible;
+    font-size: 25px;
+}
+}
+@media  (min-width:421px) and (max-width:720px) {
+
+.nav{
+    display: none;
+}
+.toggle_icon{
+    visibility: visible;
+    font-size: 25px;
+}
 }
