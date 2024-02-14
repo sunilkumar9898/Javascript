@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favourite</title>
+    <style>
+        table{
+            width: 70%;
+            margin: auto;
+            text-align: center;
+
+        }
+        thead th{
+            background-color: aquamarine;
+            padding: 10px 0px;
+        }
+        caption{
+            margin: 50px 0px 20px 0px;
+            font-size: 30px;
+            font-weight: 600;
+        }
+        tr td{
+            padding: 12px 0px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <table border="1">
+        <caption>Favourite Data</caption>
+        <thead>
+            <tr>
+                <th>Sr.no</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>City</th>
+                <th>Course</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+        <a href="index.html">Home Page</a>
+    </table>
+
+
+
+    <script>
+        let favArrData = JSON.parse(localStorage.getItem("favData"));
+        let tobody = document.getElementById("tbody");
+
+
+        function showFavrouiteData(data){
+            data.map((item,index)=>{
+                index++
+                    let tr = document.createElement("tr");
+            let td1 = document.createElement("td")
+            td1.innerText = index;
+            let td2 = document.createElement("td")
+            td2.innerText = item.name
+            let td3 = document.createElement("td")
+            td3.innerText = item.number
+            let td4 = document.createElement("td")
+            td4.innerText = item.city
+            let td5 = document.createElement("td")
+            td5.innerText = item.course
+
+
+
+            tr.append(td1,td2,td3,td4,td5)
+            tobody.append(tr)
+            })
+        }
+        showFavrouiteData(favArrData)
+    </script>
+</body>
+</html>

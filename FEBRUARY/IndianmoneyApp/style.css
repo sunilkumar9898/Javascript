@@ -177,8 +177,7 @@ transition: .3s ease-out;
     font-size: 25px;
 }
 }
-@media  (min-width:421px) and (max-width:720px) {
-
+@media  (min-width:421px) and (max-width:720px) {     
 .nav{
     display: none;
 }

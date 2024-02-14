@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login Form</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            h1 {
+                padding: 15px 0px;
+                color: antiquewhite;
+            }
+
+            form {
+                width: 40%;
+                margin: 100px auto;
+                background-color: gray;
+                padding: 50px;
+            }
+            input,
+            select {
+                width: 90%;
+                padding: 12px;
+                border-radius: 5px;
+            }
+            button {
+                width: 90%;
+                padding: 12px;
+                cursor: pointer;
+            }
+            table {
+                width: 80%;
+                margin: 150px auto;
+                text-align: center;
+            }
+            thead {
+                background-color: aquamarine;
+                padding: 50px 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            <h1>logIn form</h1>
+            <input
+                type="text"
+                id="name"
+                placeholder="Please Enter Name" /><br /><br />
+            <input
+                type="text"
+                id="number"
+                placeholder="Please Enter Number" /><br /><br />
+            <input
+                type="text"
+                id="city"
+                placeholder="Please Enter City" /><br /><br />
+            <select name="" id="course">
+                <option value="select">select</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JAVASCRIPT">Javascript</option></select
+            ><br /><br />
+            <button type="submit">Submit</button>
+        </form>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Name</th>
+                    <th>Mobile</th>
+                    <th>City</th>
+                    <th>Course</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+            <a href="favourite.html">Favourite Page</a>
+        </table>
+
+        <script>
+            let arr = JSON.parse(localStorage.getItem("userData")) || [];
+
+            let form = document.querySelector("form");
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                let obj = {
+                    name: document.getElementById("name").value,
+                    number: document.getElementById("number").value,
+                    city: document.getElementById("city").value,
+                    course: document.getElementById("course").value,
+                };
+                if (
+                    obj.name == "" ||
+                    obj.number == "" ||
+                    obj.city == "" ||
+                    obj.course == ""
+                ) {
+                    alert("Please Fill All fields");
+                    return;
+                } else {
+                    alert("Form Successfully Submit");
+                }
+                arr.push(obj);
+                localStorage.setItem("userData", JSON.stringify(arr));
+                form.reset();
+                displayData(arr);
+                console.log(arr);
+            });
+
+            let tobody = document.getElementById("tbody");
+
+            function displayData(data) {
+                tobody.innerHTML = " ";
+                let displayindex= 0;
+                data.map((item, index) => {
+                    displayindex++
+                    let tr = document.createElement("tr");
+                    let td1 = document.createElement("td");
+                    td1.innerText = displayindex;
+                    let td2 = document.createElement("td");
+                    td2.innerText = item.name;
+                    let td3 = document.createElement("td");
+                    td3.innerText = item.number;
+                    let td4 = document.createElement("td");
+                    td4.innerText = item.city;
+                    let td5 = document.createElement("td");
+                    td5.innerText = item.course;
+                    let td6 = document.createElement("td");
+                    let button1 = document.createElement("button");
+                    button1.innerText = "ADD";
+                    button1.style.background = "green";
+                    button1.style.width = "100px";
+                    button1.style.border = "none";
+                    button1.style.borderRadius = "10px";
+                    button1.addEventListener("click", () => {
+                        addFavourite(item);
+                        deleteData(arr, index);
+                        alert("succcess");
+                        displayData(arr);
+                    });
+                    let button2 = document.createElement("button");
+                    button2.innerText = "DELETE";
+                    button2.style.background = "red";
+                    button2.style.width = "100px";
+                    button2.style.margin = "8px 20px";
+                    button2.style.border = "none";
+                    button2.style.borderRadius = "10px";
+                    button2.addEventListener("click", () => {
+                        deleteData(arr, index);
+                        alert("data Deleted");
+                        displayData(arr);
+                    });
+
+                    td6.append(button1, button2);
+                    tr.append(td1, td2, td3, td4, td5, td6);
+                    tobody.append(tr);
+                });
+            }
+            displayData(arr);
+
+            function addFavourite(value) {
+                let newArr = JSON.parse(localStorage.getItem("favData")) || [];
+                newArr.push(value);
+                localStorage.setItem("favData", JSON.stringify(newArr));
+            }
+
+            function deleteData(data, index) {
+                data.splice(index, 1);
+                localStorage.setItem("userData", JSON.stringify(arr));
+            }
+        </script>
+    </body>
+</html>
