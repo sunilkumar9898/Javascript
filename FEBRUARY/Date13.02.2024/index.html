@@ -138,7 +138,7 @@
                     button1.style.border = "none";
                     button1.style.borderRadius = "10px";
                     button1.addEventListener("click", () => {
-                        addFavourite(item);
+                        addFavourite(item, "favData");
                         deleteData(arr, index);
                         alert("succcess");
                         displayData(arr);
@@ -163,10 +163,10 @@
             }
             displayData(arr);
 
-            function addFavourite(value) {
-                let newArr = JSON.parse(localStorage.getItem("favData")) || [];
+            function addFavourite(value,key) {
+                let newArr = JSON.parse(localStorage.getItem(key)) || [];
                 newArr.push(value);
-                localStorage.setItem("favData", JSON.stringify(newArr));
+                localStorage.setItem(key, JSON.stringify(newArr));
             }
 
             function deleteData(data, index) {

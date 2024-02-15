@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Favourite Admission Data</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            .html {
+                font-size: 62.5%;
+            }
+
+            .navbar input[type="checkbox"],
+            .navbar .hamburger-lines {
+                display: none;
+            }
+
+            .container {
+                max-width: 1200px;
+                width: 90%;
+                margin: auto;
+            }
+
+            .navbar {
+                box-shadow: 0px 5px 10px 0px #aaa;
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: #fff;
+                color: #000;
+                opacity: 0.85;
+                z-index: 100;
+            }
+
+            .navbar-container {
+                display: flex;
+                justify-content: space-between;
+                height: 64px;
+                align-items: center;
+            }
+
+            .menu-items {
+                order: 2;
+                display: flex;
+            }
+            .logo {
+                order: 1;
+                font-size: 2.3rem;
+            }
+            .logo img {
+                width: 50%;
+            }
+
+            .menu-items li {
+                list-style: none;
+                margin-left: 1.5rem;
+                font-size: 1.3rem;
+            }
+
+            .navbar a {
+                color: #444;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.3s ease-in-out;
+            }
+
+            .navbar a:hover {
+                color: #117964;
+            }
+
+            @media (max-width: 768px) {
+                .navbar {
+                    opacity: 0.95;
+                }
+
+                .navbar-container input[type="checkbox"],
+                .navbar-container .hamburger-lines {
+                    display: block;
+                }
+
+                .navbar-container {
+                    display: block;
+                    position: relative;
+                    height: 64px;
+                }
+
+                .navbar-container input[type="checkbox"] {
+                    position: absolute;
+                    display: block;
+                    height: 32px;
+                    width: 30px;
+                    top: 20px;
+                    left: 20px;
+                    z-index: 5;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+
+                .navbar-container .hamburger-lines {
+                    display: block;
+                    height: 28px;
+                    width: 35px;
+                    position: absolute;
+                    top: 20px;
+                    left: 20px;
+                    z-index: 2;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+
+                .navbar-container .hamburger-lines .line {
+                    display: block;
+                    height: 4px;
+                    width: 100%;
+                    border-radius: 10px;
+                    background: #333;
+                }
+
+                .navbar-container .hamburger-lines .line1 {
+                    transform-origin: 0% 0%;
+                    transition: transform 0.3s ease-in-out;
+                }
+
+                .navbar-container .hamburger-lines .line2 {
+                    transition: transform 0.2s ease-in-out;
+                }
+
+                .navbar-container .hamburger-lines .line3 {
+                    transform-origin: 0% 100%;
+                    transition: transform 0.3s ease-in-out;
+                }
+
+                .navbar .menu-items {
+                    padding-top: 100px;
+                    background: #fff;
+                    height: 100vh;
+                    max-width: 300px;
+                    transform: translate(-150%);
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: -40px;
+                    padding-left: 40px;
+                    transition: transform 0.5s ease-in-out;
+                    box-shadow: 5px 0px 10px 0px #aaa;
+                    overflow: scroll;
+                }
+
+                .navbar .menu-items li {
+                    margin-bottom: 1.8rem;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                }
+
+                .logo {
+                    position: absolute;
+                    top: 10px;
+                    right: 15px;
+                    font-size: 2.5rem;
+                }
+
+                .navbar-container input[type="checkbox"]:checked ~ .menu-items {
+                    transform: translateX(0);
+                }
+
+                .navbar-container
+                    input[type="checkbox"]:checked
+                    ~ .hamburger-lines
+                    .line1 {
+                    transform: rotate(45deg);
+                }
+
+                .navbar-container
+                    input[type="checkbox"]:checked
+                    ~ .hamburger-lines
+                    .line2 {
+                    transform: scaleY(0);
+                }
+
+                .navbar-container
+                    input[type="checkbox"]:checked
+                    ~ .hamburger-lines
+                    .line3 {
+                    transform: rotate(-45deg);
+                }
+            }
+
+            @media (max-width: 500px) {
+                .navbar-container input[type="checkbox"]:checked ~ .logo {
+                    display: none;
+                }
+            }
+            table {
+                width: 70%;
+                margin: 50px auto;
+                text-align: center;
+                border-collapse: collapse;
+            }
+            h1 {
+                text-align: center;
+                margin-top: 20px;
+
+                font-size: 40px;
+            }
+            .btn {
+                padding: 8px;
+                border: none;
+                background-color: rgb(2, 174, 237);
+                margin: 5px 0px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+            #table {
+                position: relative;
+                top: 150px;
+            }
+            table thead th {
+                padding: 12px;
+                background-color: rgb(243, 181, 12);
+            }
+            table tbody tr td {
+                padding: 12px;
+            }
+
+                    #tbody tr:nth-child(odd){
+                background-color: #4d7b8da3;
+            }
+                #tbody tr:nth-child(even){
+                background-color: #be75b17f;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="navbar-container container">
+                <input type="checkbox" name="" id="" />
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+                <ul class="menu-items">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="accept.html">Accepted</a></li>
+                    <li><a href="reject.html">Rejected</a></li>
+                    <li><a href="hold.html">Hold</a></li>
+                </ul>
+                <h1 class="logo"><img src="logo.png" alt="" /></h1>
+            </div>
+        </nav>
+        <section id="table">
+            <table border="1">
+                <h1>Hold Student Data</h1>
+                <thead>
+                    <th>Sr.No</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Course</th>
+                    <th>State</th>
+                    <th>Checking</th>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </section>
+<script>
+    let hold_data = JSON.parse(localStorage.getItem("holdDataOfStudent")) || [];
+    let tbody = document.getElementById("tbody")
+                  function hold_data_student(data){
+              tbody.innerHTML = null;
+             let  displayIndex =0;
+
+                if (data.length === 0) {
+                    // Display a message when no data is available
+                    const tr = document.createElement("tr");
+                    const td = document.createElement("td");
+                    td.setAttribute("colspan", "6"); // Spanning all columns
+                    td.innerText = "No data available.........";
+                    tr.appendChild(td);
+                    tbody.appendChild(tr);
+                } else {
+                    data.map((item, index) => {
+                        displayIndex++
+                        let tr = document.createElement("tr");
+                        let td1 = document.createElement("td");
+                        td1.innerText = displayIndex;
+                        let td2 = document.createElement("td");
+                        td2.innerText = item.name;
+                        let td3 = document.createElement("td");
+                        td3.innerText = item.email;
+                        let td4 = document.createElement("td");
+                        td4.innerText = item.course;
+                        let td5 = document.createElement("td");
+                        td5.innerText = item.state;
+                        let td6 = document.createElement("td");
+                        let button = document.createElement("button");
+                        button.innerText = "Approved";
+
+
+                        button.addEventListener("click", () => {
+                            acceptedData(item, "AcceptedDataStudent")
+                            alert("successfully insert in favrouite data");
+                            DeletedStudentData(hold_data,index)
+                            hold_data_student(hold_data);
+                         
+                        });
+
+                        button.classList.add("btn");
+                        td6.append(button);
+                        tr.append(td1, td2, td3, td4, td5, td6);
+                        tbody.append(tr);
+                    });
+                }
+    }
+      hold_data_student(hold_data);
+
+
+        function acceptedData(value ,key) {
+         let newArr = JSON.parse(localStorage.getItem(key)) || [];
+         newArr.push(value);
+         localStorage.setItem(key, JSON.stringify(newArr));
+}
+
+        function DeletedStudentData(data,index){
+                    data.splice(index,1)
+                    localStorage.setItem("holdDataOfStudent", JSON.stringify(data))
+
+                }
+
+</script>
+    </body>
+</html>

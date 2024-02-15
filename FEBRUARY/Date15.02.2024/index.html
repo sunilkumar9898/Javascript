@@ -200,7 +200,9 @@
                 margin: auto;
                 position: relative;
                 top: 120px;
-                background-color: wheat;
+                /* background-color: wheat;
+                 */
+                 background-color:  #38404741;
                 padding: 30px 50px;
                 text-align: center;
                 border-radius: 8px;
@@ -235,6 +237,7 @@
                 font-size: 20px;
             }
 
+
             button[type="submit"] {
                 /* Style the submit button */
                 background-color: #4caf50; /* Green */
@@ -261,10 +264,10 @@
             }
             table thead th {
                 padding: 12px 0px;
-                color: rgb(7, 65, 226);
+                color: rgb(1, 4, 13);
                 font-size: 18px;
                 font-weight: bold;
-                background-color: rgb(252, 185, 0);
+                background-color: rgba(108, 160, 162, 0.717);
             }
 
             .accept {
@@ -284,10 +287,17 @@
             }
             .hold {
                 width: 80px;
-                background-color: rgba(250, 128, 114, 0.743);
+                background-color: rgb(255, 122, 5);
                 margin: 10px 10px;
                 border: none;
                 border-radius: 8px;
+            }
+
+            #tbody tr:nth-child(odd){
+                background-color: #445e693e;
+            }
+                #tbody tr:nth-child(even){
+                background-color: #be75b17f;
             }
         </style>
     </head>
@@ -302,9 +312,9 @@
                 </div>
                 <ul class="menu-items">
                     <li><a href="#">Home</a></li>
-                    <li><a href="favrouitead.html">Accepted</a></li>
-                    <li><a href="#">Rejected</a></li>
-                    <li><a href="Hold.html">Hold</a></li>
+                    <li><a href="accept.html">Accepted</a></li>
+                    <li><a href="reject.html">Rejected</a></li>
+                    <li><a href="hold.html">Hold</a></li>
                 </ul>
                 <h1 class="logo"><img src="logo.png" alt="" /></h1>
             </div>
@@ -355,7 +365,7 @@
         </section>
 
         <script>
-            let arr = JSON.parse(localStorage.getItem("admissionData")) || [];
+            let arr = JSON.parse(localStorage.getItem("StudentadmissionData")) || [];
             let form = document.querySelector("form");
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -366,7 +376,7 @@
                     state: document.getElementById("state").value,
                 };
                 arr.push(obj);
-                localStorage.setItem("admissionData", JSON.stringify(arr));
+                localStorage.setItem("StudentadmissionData", JSON.stringify(arr));
                 displayData(arr);
                 form.reset();
             });
@@ -374,10 +384,12 @@
             let tbody = document.getElementById("tbody");
             function displayData(data) {
                 tbody.innerHTML = " ";
+                let displayIndex = 0;
                 data.map((item, index) => {
+                    displayIndex++
                     let tr = document.createElement("tr");
                     let td1 = document.createElement("td");
-                    td1.innerText = index;
+                    td1.innerText = displayIndex;
                     let td2 = document.createElement("td");
                     td2.innerText = item.name;
                     let td3 = document.createElement("td");
@@ -390,48 +402,36 @@
                     let accept = document.createElement("button");
                     accept.classList.add("accept");
                     accept.innerText = "Accept";
-                    accept.addEventListener("click", () => {
-                        Aceepet_Admission(item, "accept_student_data");
-                        deleteadmission(arr, index);
-                        alert("Admission Accpet");
-                    });
+                    accept.addEventListener("click",()=>{
+                        acceptedData(item,"AcceptedDataStudent")
+                        Swal.fire("Accepted Student Details Successfully");
+                        DeletedStudentData(arr,index)
+                        displayData(arr)
+                    })
 
-                    // accept.addEventListener("click", () => {
-                    //     addFavrouite(item);
-                    //     deleteadmission(arr,index);
-                    //     alert("Add succefully in favrouite");
-                    //     displayData(arr)
-                    // });
+
 
                     let reject = document.createElement("button");
                     reject.innerText = "Reject";
-
-                    reject.addEventListener("click", () => {
-                        deleteadmission(arr, index);
-                        alert("students details remove from data");
-                    });
                     reject.classList.add("reject");
-                    //         reject.addEventListener("click", () => {
-                    //     deleteadmission(arr,index);
-                    //     alert("Deleted");
-                    //     displayData(arr)
-                    // });
+                    reject.addEventListener("click" ,()=>{
+                        DeletedStudentData(arr,index)
+                        Swal.fire("Rejected Details Of Student");
+                        displayData(arr)
+                    })
+
 
                     let hold = document.createElement("button");
                     hold.innerText = "Hold";
                     hold.classList.add("hold");
-                    hold.addEventListener("click", () => {
-                        Aceepet_Admission(item, "hold_student_data");
-                        deleteadmission(arr, index);
-                        alert("Admission On hold");
-                    });
+                    hold.addEventListener("click",()=>{
+                        acceptedData(item,"holdDataOfStudent")
+                        DeletedStudentData(arr,index)
+                        displayData(arr)
+                        Swal.fire("Student Details On Hold");
+                    })
 
-                    //     hold.addEventListener("click", () => {
-                    //     holdStudent(item);
-                    //     alert("Add succefully in HoldStudentData");
-                    //     deleteadmission(arr,index);
-                    //     displayData(arr)
-                    // });
+
 
                     td6.append(accept, reject, hold);
                     tr.append(td1, td2, td3, td4, td5, td6);
@@ -440,41 +440,33 @@
             }
             displayData(arr);
 
-            // let newArr = [];
-
-            // function addFavrouite(value) {
-            //     let newArr =JSON.parse(localStorage.getItem("favrouiteaddmission")) || [];
-            //     newArr.push(value);
-            //     localStorage.setItem("favrouiteaddmission", JSON.stringify(newArr)
-            //     );
-            // }
-
-            // function deleteadmission(data,index){
-            //     data.splice(index, 1)
-            //     localStorage.setItem("admissionData",JSON.stringify(arr))
-            // }
-
-            // function holdStudent(value){
-            //     let holdArr = JSON.parse(localStorage.getItem("holdStudent")) || [];
-            //     holdArr.push(value);
-            //     localStorage.setItem("holdStudent" ,JSON.stringify(holdArr))
-            // }
 
             // <--------Fuction for accept student details-------------------------->
 
-            function Aceepet_Admission(value, key) {
-                let newData = (newArr =
-                    JSON.parse(localStorage.getItem(key)) || []);
-                newData.push(value);
-                localStorage.setItem(key, JSON.stringify(newData));
-            }
+        function acceptedData(value ,key) {
+         let newArr = JSON.parse(localStorage.getItem(key)) || [];
+         newArr.push(value);
+         localStorage.setItem(key, JSON.stringify(newArr));
+
+}
+
+
+
             // <--------Fuction for Delete student details-------------------------->
 
-            function deleteadmission(data, index) {
-                data.splice(data, 1);
-                localStorage.setItem("admissionData", JSON.stringify(data));
-                displayData(arr);
-            }
+                function DeletedStudentData(data,index){
+                    let newArr1 = JSON.parse(localStorage.getItem("rejected_data")) || [];
+                    newArr1.push(data[index]);
+                    data.splice(index,1)
+                    localStorage.setItem("StudentadmissionData", JSON.stringify(data));
+                    localStorage.setItem("rejected_data", JSON.stringify(newArr1))
+                    displayData(data);
+                }
+
+
+
+
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 </html>
