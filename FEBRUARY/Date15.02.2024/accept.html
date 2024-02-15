@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Favourite Admission Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         *{
             margin: 0;
@@ -268,7 +269,15 @@
 <script>
 
     let Accepted_students_details= JSON.parse(localStorage.getItem("AcceptedDataStudent"))||[]
+if(Accepted_students_details.length===0){
+Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Accepted Student Data Not Found",
 
+
+});
+}else{
     let tbody = document.getElementById("tbody")
     function showData(data){
              let  displayIndex =0;
@@ -292,7 +301,10 @@ displayIndex++
         })
 
     }
+}
     showData(Accepted_students_details)
 </script>
+
+
 </body>
 </html>
