@@ -202,7 +202,7 @@
                 top: 120px;
                 /* background-color: wheat;
                  */
-                 background-color:  #38404741;
+                background-color: #38404741;
                 padding: 30px 50px;
                 text-align: center;
                 border-radius: 8px;
@@ -236,7 +236,6 @@
             select option {
                 font-size: 20px;
             }
-
 
             button[type="submit"] {
                 /* Style the submit button */
@@ -293,10 +292,10 @@
                 border-radius: 8px;
             }
 
-            #tbody tr:nth-child(odd){
+            #tbody tr:nth-child(odd) {
                 background-color: #445e693e;
             }
-                #tbody tr:nth-child(even){
+            #tbody tr:nth-child(even) {
                 background-color: #be75b17f;
             }
         </style>
@@ -365,7 +364,8 @@
         </section>
 
         <script>
-            let arr = JSON.parse(localStorage.getItem("StudentadmissionData")) || [];
+            let arr =
+                JSON.parse(localStorage.getItem("StudentadmissionData")) || [];
             let form = document.querySelector("form");
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -375,18 +375,28 @@
                     course: document.getElementById("course").value,
                     state: document.getElementById("state").value,
                 };
-                arr.push(obj);
-                localStorage.setItem("StudentadmissionData", JSON.stringify(arr));
-                displayData(arr);
-                form.reset();
+
+
+                if(obj.name==="" || obj.email==="" || obj.course==="" || obj.state===""){
+                    alert("Please fill up all fields");
+                    return
+                }
+                else{
+                    Swal.fire(" Form Submited Successfully");
+                    arr.push(obj);
+                    localStorage.setItem("StudentadmissionData",JSON.stringify(arr));
+                      displayData(arr);
+                       form.reset();
+                }
+
             });
 
             let tbody = document.getElementById("tbody");
             function displayData(data) {
-                tbody.innerHTML = " ";
+                tbody.innerHTML = "";
                 let displayIndex = 0;
                 data.map((item, index) => {
-                    displayIndex++
+                    displayIndex++;
                     let tr = document.createElement("tr");
                     let td1 = document.createElement("td");
                     td1.innerText = displayIndex;
@@ -402,36 +412,32 @@
                     let accept = document.createElement("button");
                     accept.classList.add("accept");
                     accept.innerText = "Accept";
-                    accept.addEventListener("click",()=>{
-                        acceptedData(item,"AcceptedDataStudent")
+                    accept.addEventListener("click", () => {
+                        acceptedData(item, "AcceptedDataStudent");
                         Swal.fire("Accepted Student Details Successfully");
-                        DeletedStudentData(arr,index)
-                        displayData(arr)
-                    })
-
-
+                        DeletedStudentData(arr, index);
+                        displayData(arr);
+                    });
 
                     let reject = document.createElement("button");
                     reject.innerText = "Reject";
                     reject.classList.add("reject");
-                    reject.addEventListener("click" ,()=>{
-                        DeletedStudentData(arr,index)
+                    reject.addEventListener("click", () => {
+                        DeletedStudentData(arr, index);
                         Swal.fire("Rejected Details Of Student");
-                        displayData(arr)
-                    })
-
+                        acceptedData(item, "rejectet_student_list");
+                        displayData(arr);
+                    });
 
                     let hold = document.createElement("button");
                     hold.innerText = "Hold";
                     hold.classList.add("hold");
-                    hold.addEventListener("click",()=>{
-                        acceptedData(item,"holdDataOfStudent")
-                        DeletedStudentData(arr,index)
-                        displayData(arr)
+                    hold.addEventListener("click", () => {
+                        acceptedData(item, "holdDataOfStudent");
+                        DeletedStudentData(arr, index);
+                        displayData(arr);
                         Swal.fire("Student Details On Hold");
-                    })
-
-
+                    });
 
                     td6.append(accept, reject, hold);
                     tr.append(td1, td2, td3, td4, td5, td6);
@@ -440,32 +446,25 @@
             }
             displayData(arr);
 
-
             // <--------Fuction for accept student details-------------------------->
 
-        function acceptedData(value ,key) {
-         let newArr = JSON.parse(localStorage.getItem(key)) || [];
-         newArr.push(value);
-         localStorage.setItem(key, JSON.stringify(newArr));
-
-}
-
-
+            function acceptedData(value, key) {
+                let newArr = JSON.parse(localStorage.getItem(key)) || [];
+                newArr.push(value);
+                localStorage.setItem(key, JSON.stringify(newArr));
+            }
 
             // <--------Fuction for Delete student details-------------------------->
 
-                function DeletedStudentData(data,index){
-                    let newArr1 = JSON.parse(localStorage.getItem("rejected_data")) || [];
-                    newArr1.push(data[index]);
-                    data.splice(index,1)
-                    localStorage.setItem("StudentadmissionData", JSON.stringify(data));
-                    localStorage.setItem("rejected_data", JSON.stringify(newArr1))
-                    displayData(data);
-                }
+            function DeletedStudentData(data, index) {
+                data.splice(index, 1);
+                localStorage.setItem(
+                    "StudentadmissionData",
+                    JSON.stringify(data)
+                );
 
-
-
-
+                displayData(data);
+            }
         </script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>

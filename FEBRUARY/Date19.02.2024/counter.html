@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 40%;
+            display: flex;
+            margin: auto;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+        }
+        .container p:nth-child(2){
+            margin-top: 20px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+        <div class="hr ">
+            <h4>Hours</p>
+            <p  id="hr">0</p>
+        </div>
+            <div class="min" >
+                <h4>Min</p>
+            <p id="min">0</p>
+        </div>
+            <div class="Sec" >
+                <h4>Second</p>
+            <p id="sec">0</p>
+        </div>
+    </div>
+
+    <!-- <script>
+        let count = 0;
+        let count1 = document.getElementById("count1");
+        for(let i=0;i<=count;i++){
+        setInterval(()=>{
+          count++
+         count1.innerText=count;
+        },1000)
+
+
+        }
+
+    </script> -->
+
+
+    <script>
+        // let count = 0;
+        // let min =0;
+        // let count1 = document.getElementById("count1");
+        // let mint = document.getElementById("min");
+        // console.log(mint);
+        // setInterval(() => {
+        //     count++;
+        //     count1.innerText = count;
+
+        //  if(count==60){
+        //     min++;
+        //     mint.innerText=min;
+        //     count=0
+
+        // }
+        // }, 100);
+
+
+
+
+        let hr= document.getElementById("hr")
+        let min= document.getElementById("min")
+        let sec= document.getElementById("sec")
+        let hr1=0;
+        let min1=0;
+        let secc1 = 0;
+
+        setInterval(()=>{
+            secc1++;
+            sec.innerText = secc1;
+
+            if(secc1==60){
+                secc1 = 0;
+                min1++;
+                min.innerText = min1
+            }else if(min1==60){
+                secc1=0;
+                min1=0;
+                hr1++;
+                hr.innerText = hr1
+            }
+        },1000)
+
+
+
+
+    </script>
+
+
+<!--
+    <script>
+        let count = 0;
+        let count1 = document.getElementById("count1");
+
+        function updateCount() {
+            count++;
+            count1.innerText = count;
+            setTimeout(updateCount, 1000);
+        }
+
+        updateCount();
+    </script> -->
+</body>
+</html>
