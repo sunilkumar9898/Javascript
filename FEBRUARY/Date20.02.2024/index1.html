@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>hello world</h1>
+
+    <script>
+        // function say(){
+        //     console.log("hello from deva",this)
+        // }
+        // say()
+        // let john={
+
+        //     name:"mohan lal",
+        //     age:25,
+        //     sayHello:function(){
+        //         console.log(this.name,this.age)
+        //     }
+        // }
+        // john.sayHello()
+        // function sayHello(){
+        //     console.log("this from ",this)
+        // }
+
+        // let obj1={
+        //     name:"manjeet",age:50
+        // }
+        // let obj2={
+        //     name:"mannu",age:40
+        // }
+        // let obj3={
+        //     name:"munnu",age:80
+        // }
+        // let bind=sayHello.bind(obj1)
+        // bind()
+        // sayHello.apply(obj2)
+        // sayHello.apply(obj3)
+
+        function getData(name){
+            this.name=name;
+            this.sayhello=function(){
+                console.log("hello",this,this.name)
+                
+            }
+
+        }
+        let value=new getData("manjeet")
+        value.sayhello()
+        console.log(value);
+    </script>
+</body>
+</html>
