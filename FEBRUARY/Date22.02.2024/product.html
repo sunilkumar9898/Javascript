@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            #container {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 20px;
+            }
+            #container div {
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                padding: 20px;
+                border-radius: 10px 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="text-align: center">Welcome to Todos page</h1>
+        <div id="container"></div>
+    </body>
+    <script>
+        let url = "https://jsonplaceholder.typicode.com/todos";
+        let arr = [];
+        async function getData() {
+            try {
+                let res = await fetch(url);
+                let data = await res.json();
+                arr = data;
+                displayTodos(arr);
+
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getData();
+        let container = document.getElementById("container");
+        function displayTodos(data) {
+            data.map((todo) => {
+                let div = document.createElement("div");
+                let userId = document.createElement("h4");
+                userId.innerText = "userId:-" + " " + todo.userId;
+                let id = document.createElement("h4");
+                id.innerText = "Id:-" + " " + todo.id;
+                let title = document.createElement("h3");
+                title.innerText = "title:-" + " " + todo.title;
+                let status = document.createElement("h2");
+                status.innerText = "status:-" + " " + todo.completed;
+                div.append(userId, id, title, status);
+                container.append(div);
+            });
+        }
+
+        // displayTodos(arr);
+    </script>
+</html>

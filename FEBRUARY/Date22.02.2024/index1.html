@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #color{
+            animation: color 50s infinite;
+        }
+
+        @keyframes color {
+            0%{
+                background-color: red;
+            }
+            10%{
+                background-color: green;
+            }
+            20%{
+                background-color: slateblue;
+            }
+            30%{
+                background-color: salmon;
+            }
+            40%{
+
+                background-color: brown;
+            }
+            50%{
+                background-color: gray;
+            }
+            60%{
+                background-color: yellowgreen;
+            }
+            70%{
+                background-color: yellow;
+            }
+            80%{
+                background-color: hotpink;
+            }
+            90%{
+                background-color: blueviolet;
+            }
+            100%{
+                background-color: turquoise;
+            }
+        }
+
+        .box{
+            width: 100%;
+            height: max-content;
+            padding: 150px 0px;
+            margin-top: 200px;
+            background-color: black;
+            transform: skewY(-5deg);
+            position: relative;
+        }
+        .box h1{
+            color:white;
+            transform: skewY(2deg);
+            position: absolute;
+            width: 70%;
+            margin: auto;
+            left: 20%;
+            font-size: 18px;
+            top: 30%;
+            /* transform: skewY(50% ,-50%); */
+        }
+    </style>
+</head>
+<body id="color">
+<h1>Rajasthan Police</h1>
+<div class="box">
+<h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eveniet cumque officia aliquid voluptate deserunt magni totam soluta sint aperiam aspernatur, dicta id saepe labore sapiente vel quos ea eius dolor rem animi ex nemo quidem. Consequuntur qui, eveniet quasi quibusdam ea, in asperiores odit doloribus distinctio repudiandae, culpa ducimus!</h1>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Promise Class</title>
+    </head>
+    <body>
+        <h1>Welcome to javascript</h1>
+    </body>
+    <script>
+        // // way-01
+        // how to create promise
+        // let createPromise = new Promise(function (resolve, reject) {
+        //     setTimeout(() => {
+        //         console.log("i am from setTimeout");
+        //         resolve()
+        //     }, 1000);
+        // });
+
+        // // how to consume
+        // createPromise.then(function(){
+        //     console.log("promise resolved")
+        // })
+
+        // new Promise(function(resolve,reject){
+        //      setTimeout(() => {
+        //             console.log("i am from setTimeout2");
+        //                 resolve()
+        //             }, 3000);
+        // })
+        // .then(function(){
+        //     console.log("hellow")
+        // })
+        // new Promise(function (resolve, reject) {
+        //     setTimeout(() => {
+        //         resolve({ name: "sunil kumar", email: "sunil@gmail.com" });
+        //     }, 1000);
+        // }).then(function(user){
+        //     console.log(user);
+        // })
+
+        // let data = new Promise(function (resolve, reject) {
+        //     setTimeout(() => {
+        //         let number = 5;
+        //         if (number < 10) {
+        //             resolve({ name: "sunil kumar", mobile: 9598125005 });
+        //         } else {
+        //             reject("Error:Somthing went wrong");
+        //         }
+        //     }, 2000);
+        // })
+        //     .then(function (value) {
+        //         console.log(value);
+        //         console.log(value.name)
+        //     })
+        //     // .then(function (data) {
+        //     //     console.log(data);
+        //     // })
+        //     .catch(function (error) {
+        //         console.log(error);
+        //     })
+        //     .finally(function () {
+        //         console.log("i am not sure bout operation");
+        //     });
+
+        //     const promiseFive = new Promise(function (resolve, reject) {
+        //         setTimeout(function () {
+        //             let error = false;
+        //             if (!error) {
+        //                 resolve({ name: "sunil kumar", pass: 123456789 });
+        //             } else {
+        //                 reject("hello");
+        //             }
+        //         }, 1000);
+        //     });
+
+        //     async function consumePromiseFive() {
+        //         try {
+        //             const response = await promiseFive;
+        //             console.log(response);
+        //         } catch (error) {
+        //             console.log(error);
+        //         }
+        //     }
+
+        //     consumePromiseFive();
+        let arr=[]
+        let url = "https://jsonplaceholder.typicode.com/posts";
+        async function getAlluserData() {
+            try {
+                let res = await fetch(url);
+                let data=await res.json()
+                arr= data
+                console.log(data,"data")
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getAlluserData();
+console.log(arr)
+        // let res = fetch(url);
+        // res.then(function (value) {
+        //     return value.json();
+        // }).then(function (data) {
+        //     console.log(data);
+        // });
+        // console.log(res)
+    </script>
+</html>

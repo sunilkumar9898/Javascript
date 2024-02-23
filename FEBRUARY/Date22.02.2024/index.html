@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TODOS</title>
+        <style>
+            .container{
+                width: 95%;
+                margin:50px auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px ,1fr));
+                gap: 40px 20px;
+                font-size: clamp(12px ,2vw ,20px);
+
+            }
+
+            .container div{
+                box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+                padding: 20px;
+                transition: .5s ease-out;
+                cursor: pointer;
+            }
+            .container div:hover{
+              transform: translateY(-10px) scale(1.05);
+            }
+            .container img{
+                width: 100%;
+                aspect-ratio: 5/2;
+            box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+            }
+            .container p{
+                color: rgb(3, 116, 245);
+            }
+
+            @media  (max-width:420px) and (min-width:220px) {
+                    .container{
+                width: 95%;
+                margin:50px auto;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(150px ,1fr));
+                gap: 40px 20px;
+            }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="container"></div>
+
+        <script>
+            let url = "https://restcountries.com/v3.1/all";
+            let arr = [];
+
+            async function getData() {
+                try {
+                    let res = await fetch(url);
+                    let data = await res.json();
+                    arr = data;
+                    displayData(arr)
+                    console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            getData(arr);
+
+            let container = document.getElementById("container");
+
+            function displayData(product) {
+                product.map((item) => {
+                    let div = document.createElement("div");
+                    let name1 = document.createElement("p");
+                    name1.innerText = item.name.common;
+                    let flag = document.createElement("img");
+                    flag.src = item.flags.png;
+                    let capital  = document.createElement("h3");
+                    capital.innerText ="Capital" +" :"+ item.capital;
+
+                    let population  = document.createElement("h4");
+                    population.innerText ="Population" +" :"+  item.population;
+
+
+                    let region  = document.createElement("h5");
+                    region.innerText ="Region" +" :"+  item.region;
+
+                    div.append(flag,name1,capital,population,region);
+                    container.append(div)
+                });
+            }
+displayData(arr)
+
+
+        </script>
+    </body>
+</html>
