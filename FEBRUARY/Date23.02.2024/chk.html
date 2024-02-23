@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[id="cb1"] + label {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 20px solid #bcbcbc;
+  border-radius: 2px;
+  cursor: pointer;
+}
+input[id="cb1"]:checked + label:after {
+  position: relative;
+  top: -4px;
+  left: 2px;
+  content: '\2714';
+  font-size: 14px;
+}
+input[id="cb1"] {
+  display: none;
+}
+    </style>
+</head>
+<body>
+    <h3>Checkbox Border Color & Radius</h3>
+<input type="checkbox" id="cb1">
+<label for="cb1"></label>
+</body>
+</html>
