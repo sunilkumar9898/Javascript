@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hello</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<form>
+    <input type="text" id="name" placeholder="please enter name"><br><br>
+    <input type="text" id="email"placeholder="please enter  email"><br><br>
+    <button type="submit">submit</button>
+
+</form>
+<div class="container" id="container">
+
+
+</div>
+
+
+<script>
+    let arr= JSON.parse(localStorage.getItem("localstorage")) || [];
+let form = document.querySelector("form");
+
+form.addEventListener("submit",(e) =>{
+e.preventDefault();
+let obj={
+    name:document.getElementById("name").value,
+    email:document.getElementById("email").value
+}
+
+if(obj.name =="" || obj.email ==""){
+    alert("please All Required Field Fillup");
+    return
+}
+else{
+arr.push(obj);
+localStorage.setItem("localstorage" ,JSON.stringify(arr));
+DisplayData(arr)
+form.reset()
+}
+})
+
+let container = document.getElementById("container");
+
+function DisplayData(data){
+    container.innerHTML=" "
+data.map((item ,index)=>{
+    let div = document.createElement("div");
+    let name = document.createElement("h2");
+    name.innerText = item.name;
+
+        let email = document.createElement("h2");
+    email.innerText = item.email;
+
+    let btn = document.createElement("button");
+    btn.innerText = " Accept";
+    btn.addEventListener("click",()=>{
+        acceptedData(item,"AccpetedData");
+        deleteData(arr,index);
+        DisplayData(arr)
+    })
+
+    div.append(name,email,btn);
+    container.append(div)
+
+
+})
+}
+DisplayData(arr);
+
+function acceptedData(value ,key){
+    let arr1  =JSON.parse(localStorage.getItem(key)) || [];
+    arr1.push(value)
+    localStorage.setItem(key , JSON.stringify(arr1));
+}
+
+function deleteData(data1, index){
+    data1.splice(index, 1);
+    localStorage.setItem("localstorage", JSON.stringify(data1));
+    DisplayData(data1);
+}
+</script>
+</body>
+</html>
