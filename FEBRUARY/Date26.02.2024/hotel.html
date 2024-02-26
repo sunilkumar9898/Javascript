@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hotels</title>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 50px 40px;
+                width: 90%;
+                margin: 50px auto;
+            }
+            .container div {
+                line-height: 20px;
+                background-color: rgb(242, 231, 231);
+                padding: 15px;
+                /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
+                transition: 0.5s ease-out;
+                box-shadow: 0px 0px 20px gray;
+                cursor: pointer;
+            }
+            .container div:hover {
+                transform: scale(1.05);
+            }
+
+            .container div img {
+                width: 100%;
+                padding: 20px;
+                margin: auto;
+                text-align: center;
+                aspect-ratio: 5/4;
+                border-radius: 30px;
+            }
+
+            p {
+                color: blue;
+                padding: 10px 0px;
+            }
+
+            h3 {
+                color: red;
+                padding-top: 10px;
+            }
+            h5 {
+                color: rgb(1, 56, 234);
+                font-size: 18px;
+            }
+
+            h1{
+                text-align: center;
+                padding-top: 20px;
+                font-size: 50px;
+                -webkit-text-stroke:1px rgb(244, 5, 248) ;
+                color: transparent;
+                text-shadow: 2px 5px 5px rgb(182, 0, 248);
+            }
+            h2{
+                text-shadow: 2px 5px 5px rgb(227, 16, 227);
+            }
+
+            @media (max-width: 420px) and (min-width: 220px) {
+                .container {
+                    display: grid;
+                    grid-template-columns: repeat(1, 1fr);
+                    gap: 50px 40px;
+                    width: 90%;
+                    margin: 50px auto;
+                }
+            }
+            @media (max-width: 620px) and (min-width: 421px) {
+                .container {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 50px 40px;
+                    width: 90%;
+                    margin: 50px auto;
+                }
+            }
+
+            @media (max-width: 820px) and (min-width: 621px) {
+                .container {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 50px 40px;
+                    width: 90%;
+                    margin: 50px auto;
+                }
+            }
+
+            @media (max-width: 1000px) and (min-width: 821px) {
+                .container {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 50px 40px;
+                    width: 90%;
+                    margin: 50px auto;
+                }
+            }
+        </style>
+    </head>
+    <body>
+                <h1> DATA FROM API</h1>
+        <div class="container" id="container"></div>
+
+        <script>
+            let arr = [];
+            let url = "http://localhost:8000/hotels/";
+
+            async function hotels() {
+                try {
+                    let responce = await fetch(url);
+                    let value = await responce.json();
+                    arr = value;
+                    displayData(arr);
+                    console.log(arr);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            hotels(arr);
+
+            let container = document.getElementById("container");
+
+            function displayData(data) {
+                data.map((item) => {
+                    let div = document.createElement("div");
+                    let content = document.createElement("p");
+                    content.innerText = item.content;
+
+                    let id = document.createElement("h2");
+                    id.innerText = `ID : ${item.id}`;
+
+                    let image = document.createElement("img");
+                    image.src = item.image;
+
+                    let price = document.createElement("h3");
+                    price.innerText = `Price : ${item.price}`;
+
+                    let rating = document.createElement("h5");
+                    rating.innerText = `Rating : ${item.rating}`;
+
+                    div.append(id, image, content, price, rating);
+                    container.append(div);
+                });
+            }
+
+            displayData(arr);
+        </script>
+    </body>
+</html>
