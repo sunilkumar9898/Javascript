@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+
+
+    <style>
+        #container{
+            display: grid;
+            grid-template-columns: repeat(auto-fit , minmax(250px ,1fr));
+            gap: 20px 40px;
+            width: 90%;
+            margin: 50px auto;
+            text-align: center;
+        }
+        #container div{
+            background-color: rgb(223, 237, 237);
+            border-radius: 20px;
+            padding: 20px;
+        }
+        #container div img{
+            width: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+
+</div>
+
+
+
+<script>
+    let arr= [];
+    let url  ="http://localhost:8000/data";
+
+    async function ProductData(){
+        try {
+            let res = await fetch(url);
+            let value = await res.json();
+            arr = value;
+            displayData(arr)
+            console.log(arr);
+
+        } catch (error) {
+            console.log("error");
+        }
+    }
+    ProductData();
+
+
+    let container = document.getElementById("container")
+function displayData(data){
+data.map((item)=>{
+    let div = document.createElement("div");
+    let id =  document.createElement("p");
+    id.innerText = item.id;
+    let image =  document.createElement("img");
+    image.src= item.img;
+    let desc=  document.createElement("p");
+    desc.innerText = item.desc;
+    let price =  document.createElement("p");
+    price.innerText = item.price;
+    let rating =  document.createElement("p");
+    rating.innerText = item.rating;
+    let path =  document.createElement("p");
+    path.innerText = item.Path;
+
+    div.append(id,image,desc,price,rating,path);
+    container.append(div)
+
+})
+}
+
+displayData(arr)
+</script>
+</body>
+</html>

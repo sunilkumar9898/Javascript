@@ -1,0 +1,34 @@
+{
+    "data":[
+        {
+            "name": "John",
+            "email": "john@example.com",
+            "image":"https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/09/instagram-image-size.jpg"
+        },
+        {
+            "name": "Alice",
+            "email": "alice@example.com",
+            "image":"https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/09/instagram-image-size.jpg"
+        },
+        {
+            "name": "Bob",
+            "email": "bob@example.com",
+            "image":"https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/09/instagram-image-size.jpg"
+        },
+        {
+            "name": "John",
+            "email": "john@example.com",
+            "image":"https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png"
+        },
+        {
+            "name": "Alice",
+            "email": "alice@example.com",
+            "image":"https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/09/instagram-image-size.jpg"
+        },
+        {
+            "name": "Bob",
+            "email": "bob@example.com",
+            "image":"https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/09/instagram-image-size.jpg"
+        }
+    ]
+}

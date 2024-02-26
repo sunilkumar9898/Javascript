@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Javascript ASYNC AWAIT</title>
+        <style>
+
+
+            .container{
+               display: grid;
+
+                grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+                gap: 20px 40px;
+                width: 90%;
+                margin: 80px auto;
+            }
+            .container div{
+                padding: 50px 10px;
+                width: 100%;
+                /* clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%); */
+                background-color: rgba(232, 212, 212, 0.985);
+            transition:  all .5s ease-out;
+            }
+
+            .container div:hover{
+                color: #1F252E;
+                cursor: pointer;
+            box-shadow: 0 0 40px rgba(27, 21, 21, 0.212);;
+            }
+            .container div img{
+                width: 100%;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container" id="container"></div>
+
+        <script>
+            let url = "http://localhost:8080/data";
+            let arr = [];
+
+            async function data() {
+                try {
+                    let res = await fetch(url);
+                    let value = await res.json();
+                    arr = value;
+                    console.log(value);
+                        displayData(arr)
+                } catch (error) {
+                    console.log("error");
+                }
+            }
+            data();
+
+            let container = document.getElementById("container")
+            function displayData(value1){
+                value1.map((item)=>{
+                    let div = document.createElement("div")
+
+                    let id = document.createElement("p");
+                     id.innerText = `id : ${item.id}`;
+                         let city = document.createElement("img");
+                     city.src = ` ${item.image}`;
+                         let HotelName = document.createElement("p");
+                     HotelName.innerText =`HotelName: ${item.HotelName}`;
+                     div.append(id,city,HotelName)
+
+                     container.append(div)
+
+
+                })
+            }
+            displayData(arr)
+        </script>
+    </body>
+</html>
