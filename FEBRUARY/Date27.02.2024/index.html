@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Data From Api</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            #container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 50px 30px;
+                width: 90%;
+                margin: 50px auto;
+            }
+            #container div {
+                box-shadow: 0px 0px 10px rgba(127, 108, 108, 0.512);
+                padding: 15px;
+                cursor: pointer;
+                transition: .3s ease-out;
+            }
+
+            #container div img {
+                width: 100%;
+                aspect-ratio: 4/3;
+            }
+            #container div p {
+                padding: 10px 0px;
+            }
+            #container div h3,
+            h5 {
+                padding: 2px;
+                font-size: 15px;
+            }
+
+            .buttton{
+                display: flex;
+                justify-content: space-around;
+                /* padding: 15px; */
+            }
+            .buttton button:nth-child(1){
+                background-color: green;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition:  .3s ease-in-out;
+            }
+
+                .buttton button:nth-child(2){
+                background-color: rgb(243, 137, 0);
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition:  .3s ease-in-out;
+            }
+            .buttton button:nth-child(2):hover{
+                box-shadow: 0px 0px 30px rgb(255, 145, 1);
+            }
+
+                .buttton button:nth-child(1):hover{
+                box-shadow: 0px 0px 30px rgb(1, 249, 1);
+            }
+            nav h1{
+                text-align: center;
+                color: white;
+            }
+            nav{
+                background-color: blueviolet;
+                padding: 20px 0px;
+                width: 90%;
+                margin: 20px auto;
+                box-shadow: 0px 0px 20px blueviolet;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <h1>SHOES</h1>
+        </nav>
+        <div id="container">
+
+        </div>
+
+        <script>
+            let arr = [];
+            let url = "http://localhost:7000/data";
+            async function data() {
+                try {
+                    let response = await fetch(url);
+                    let value = await response.json();
+                    arr = value;
+                    DisplayData(arr);
+                    console.log(arr);
+                } catch (error) {
+                    console.log("error");
+                }
+            }
+            data(arr);
+            let container = document.getElementById("container");
+            function DisplayData(e) {
+                e.map((item) => {
+                    let div = document.createElement("div");
+                    let image = document.createElement("img");
+                    image.src = item.image;
+
+                    let desc = document.createElement("p");
+                    desc.innerText = item.desc;
+
+                    let price = document.createElement("h3");
+                    price.innerText = `Price : ${item.price}`;
+
+                    let rating = document.createElement("h5");
+                    rating.innerText = `Rating : ${item.rating}`;
+
+                    let reviews = document.createElement("h5");
+                    reviews.innerText = `Reviews : ${item.reviews}`;
+
+                    let button = document.createElement("p");
+                    button.classList.add("buttton");
+                    let btn = document.createElement("button");
+                    btn.innerText = "Buy To Now";
+
+                    let btn1 = document.createElement("button");
+                    btn1.innerText = "Add T0 Cart";
+                    button.append(btn, btn1);
+
+                    div.append(image, desc, price, rating, reviews, button);
+                    container.append(div);
+                    console.log(container);
+                });
+            }
+            DisplayData(arr);
+        </script>
+    </body>
+</html>
