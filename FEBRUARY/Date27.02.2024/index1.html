@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>hello</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            form {
+                width: 30%;
+                margin: 50px auto;
+                box-shadow: 0px 0px 20px gray;
+                padding: 40px;
+                border-radius: 8px;
+                background-color: #2a4e6c;
+            }
+            form input {
+                width: 90%;
+                padding: 10px;
+                margin-left: 18px;
+                outline: none;
+            }
+            form input[type="text"] {
+                border: none;
+                background-color: #2a4e6c;
+                outline: none;
+                border-bottom: 2px solid rgb(214, 180, 180);
+                color: rgb(13, 0, 0);
+            }
+
+            form input[type="url"] {
+                border: none;
+                background-color: #2a4e6c;
+                outline: none;
+                border-bottom: 2px solid rgb(214, 180, 180);
+                color: rgb(12, 0, 0);
+            }
+form input:focus{
+    background-color: white;
+}
+            input::placeholder{
+                color: rgba(240, 235, 235, 0.468);
+                font-size: 18px;
+                font-weight: bold;
+            }
+            button {
+                display: flex;
+                margin: auto;
+                margin-top: 50px;
+                padding: 10px 15px;
+                border: none;
+
+                background-color: #add8e6;
+                transition: 0.3s ease-out;
+            }
+            button:hover {
+                box-shadow: 0px 0px 30px #add8e6;
+                cursor: pointer;
+            }
+
+            .container {
+                background-color: rgb(70, 130, 181);
+                display: grid;
+                place-items: center;
+                height: 100vh;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <form>
+                <input
+                    type="text"
+                    id="id"
+                    placeholder="Please enter Id" /><br /><br />
+                <input
+                    type="text"
+                    id="title"
+                    placeholder="Please enter Title" /><br /><br />
+                <input
+                    type="text"
+                    id="price"
+                    placeholder="please  enter Price" /><br /><br />
+                <input
+                    type="text"
+                    id="brand"
+                    placeholder="Please enter Brand" /><br /><br />
+                <input
+                    type="url"
+                    id="image"
+                    placeholder="Please enter Image URL" /><br /><br />
+                <button type="submit">SUBMIT</button>
+            </form>
+        </div>
+
+        <script>
+            let url = "http://localhost:8080/data";
+    let form = document.querySelector("form");
+    form.addEventListener("submit", postData);
+
+    async function postData(e) {
+        e.preventDefault();
+        let obj = {
+            id: document.getElementById("id").value,
+            title: document.getElementById("title").value,
+            price: document.getElementById("price").value,
+            brand: document.getElementById("brand").value,
+            image: document.getElementById("image").value,
+        };
+
+        try {
+            let response = await axios.post(
+                "http://localhost:8080/data",
+                obj
+            );
+            console.log(response.data);
+            // Reset the form after successful submission
+            form.reset();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+            // form.addEventListener("submit", (e) => {
+            //     e.preventDefault();
+            //     let obj = {
+            //         id: document.getElementById("id").value,
+            //         title: document.getElementById("title").value,
+            //         price: document.getElementById("price").value,
+            //         brand: document.getElementById("brand").value,
+            //         image: document.getElementById("image").value,
+            //     };
+            //     if (
+            //         obj.id === "" ||
+            //         obj.title === "" ||
+            //         obj.price === "" ||
+            //         obj.brand === "" ||
+            //         obj.image === ""
+            //     ) {
+            //         alert("Please entry All fields");
+            //         return;
+            //     } else {
+            //         alert("Success");
+            //     }
+            //     console.log(obj);
+            //     form.reset();
+            // });
+        </script>
+    </body>
+</html>

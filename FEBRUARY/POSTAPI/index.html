@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                background: url("https://colorlib.com/etc/bwiz/colorlib-wizard-10/images/form-wizard-bg.jpg")
+                    center bottom;
+                background-size: cover;
+
+                width: 100%;
+                height: 100vh;
+            }
+
+            form {
+                padding: 50px;
+                position: absolute;
+                top: 12%;
+                left: 25%;
+                width: 22%;
+                background-color: white;
+            }
+
+            form img {
+                display: flex;
+                margin: auto;
+                margin-bottom: 40px;
+            }
+
+            form input {
+                width: 100%;
+                padding: 8px 0px;
+                border: none;
+                outline: none;
+                border-bottom: 1px solid black;
+                font-size: 15px;
+            }
+            form input::placeholder {
+                color: rgb(70, 67, 67);
+                font-weight: bold;
+            }
+            button {
+                text-align: end;
+                display: flex;
+                margin: auto;
+                padding: 15px 25px;
+                background-color: rgb(33, 32, 32);
+                color: white;
+                border: none;
+                transition: 0.3s ease-out;
+            }
+            button:hover {
+                background-color: rgb(52, 50, 50);
+                cursor: pointer;
+            }
+            td img{
+                width: 120px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <form>
+                <img
+                    src="https://colorlib.com/etc/bwiz/colorlib-wizard-10/images/avartar.png"
+                    alt="" />
+
+                <input type="text" id="name" placeholder="Name" /><br /><br />
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Email" /><br /><br />
+                <input
+                    type="phone"
+                    id="number"
+                    placeholder="Phone" /><br /><br />
+                <input
+                    type="text"
+                    id="Address"
+                    placeholder="Address" /><br /><br />
+                <input
+                    type="text"
+                    id="nation"
+                    placeholder="Nation" /><br /><br />
+                <input type="url" id="url" placeholder="url" /> <br /><br />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        <h1>all products</h1>
+        <div id="product"></div>
+        <table>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Email</td>
+                    <td>Phone</td>
+                    <td>Address</td>
+                    <td>Nation</td>
+                    <td>Image</td>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+
+        <script>
+            let arr = [];
+
+            let form = document.querySelector("form");
+            form.addEventListener("submit", postData);
+            // <----------Fuction for postdata to server------>
+
+            async function postData(e) {
+                e.preventDefault();
+                let obj = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    phone: document.getElementById("number").value,
+                    Address: document.getElementById("Address").value,
+                    nation: document.getElementById("nation").value,
+                    url: document.getElementById("url").value,
+                };
+                if (
+                    obj.id == "" ||
+                    obj.name == "" ||
+                    obj.email == "" ||
+                    obj.phone == "" ||
+                    obj.Address == "" ||
+                    obj.nation == "" ||
+                    obj.url == ""
+                ) {
+                    alert("Fill Up All Field");
+                    return;
+                } else {
+                    alert("success");
+                }
+                console.log(obj);
+                try {
+                    let responce = await axios.post(
+                        "http://localhost:8080/product",
+                        obj
+                    );
+                    arr.push(responce);
+
+                    displayData(arr);
+                    form.reset();
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            // <----------Fuction for get data from server------->
+
+            const getData = async () => {
+                try {
+                    let allValue = await axios.get(
+                        "http://localhost:8080/product"
+                    );
+                    let finaldata = allValue.data;
+                    // console.log(finaldata,"value");
+                    displayData(finaldata);
+                } catch (error) {
+                    console.log(error);
+                }
+            };
+
+            // <-----------Function for delete data------->
+
+            async function deleteData(id) {
+                try {
+                    let deleData = await axios.delete(
+                        `http://localhost:8080/product/${id}`
+                    );
+                    console.log(deleData);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            getData();
+            let tbody = document.getElementById("tbody");
+            function displayData(value) {
+                value.map((item) => {
+                    let tr = document.createElement("tr");
+                    let id = document.createElement("td");
+                    id.innerText = item.id;
+
+                    let name = document.createElement("td");
+                    name.innerText = item.name;
+
+                    let email = document.createElement("td");
+                    email.innerText = item.email;
+                    let phone = document.createElement("td");
+                    phone.innerText = item.phone;
+
+                    let Address = document.createElement("td");
+                    Address.innerText = item.Address;
+
+                    let nation = document.createElement("td");
+                    nation.innerText = item.nation;
+                    let url = document.createElement("td");
+                    let  img = document.createElement("img")
+                    img.src = item.url
+                    let btntd = document.createElement("td");
+
+                    let btn = document.createElement("button");
+                    btn.innerText = "delete";
+                    btn.addEventListener("click", () => {
+                        deleteData(item.id);
+                        alert("deleted");
+                    });
+                    btntd.append(btn);
+                    url.append(img)
+                    tr.append(
+                        id,
+                        name,
+                        email,
+                        phone,
+                        Address,
+                        nation,
+                        url,
+                        btntd
+                    );
+                    tbody.append(tr);
+                });
+            }
+            // displayData()
+            console.log(arr);
+        </script>
+    </body>
+</html>
