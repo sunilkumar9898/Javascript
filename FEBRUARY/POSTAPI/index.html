@@ -65,6 +65,16 @@
             td img{
                 width: 120px;
             }
+
+
+            table{
+                width: 90%;
+                margin: auto;
+            }
+
+            #tbody{
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -95,17 +105,19 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
-        <h1>all products</h1>
+        <h1 style="text-align: center; margin: 20px 0px;">all products</h1>
         <div id="product"></div>
-        <table>
+        <table border="1">
             <thead>
                 <tr>
+                    <td>Id</td>
                     <td>Name</td>
                     <td>Email</td>
                     <td>Phone</td>
                     <td>Address</td>
                     <td>Nation</td>
                     <td>Image</td>
+                    <td>Action</td>
                 </tr>
             </thead>
             <tbody id="tbody"></tbody>

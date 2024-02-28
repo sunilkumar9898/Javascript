@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STUDENT DATA</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+body {
+    background-color: #f0f0f0; /* Light gray background */
+    font-family: Arial, sans-serif;
+
+}
+
+.container {
+    display: flex;
+    width: 90%;
+    margin: 100px auto;
+    justify-content: space-around;
+}
+
+.table {
+    width: 100%;
+    background-color: #fff;
+overflow-y: scroll;
+overflow-x: hidden;
+height: 70VH;
+    /* border-radius: 8px; Rounded corners */
+
+    /* padding: 20px 0px; */
+}
+
+
+.table h1 {
+    text-align: center;
+    padding: 15px;
+    background-color: #4CAF50; /* Green background */
+    color: #fff; /* White text */
+    margin: 0;
+        position: sticky; /* Make the header sticky */
+    top: 0; /* Stick to the top */
+}
+thead th {
+    padding: 10px 20px;
+    background-color: #333; /* Dark gray background */
+    color: #fff; /* White text */
+            position: sticky; /* Make the header sticky */
+    top: 65px; /* Stick to the top */
+
+}
+
+
+table {
+    width: 98%;
+    margin: auto;
+    text-align: center;
+    background-color: #dad8d8;
+    border-collapse: collapse;
+}
+table  tr td img{
+    width: 50px;
+    margin: auto;
+}
+table  tr td button{
+    padding: 8px;
+    border: none;
+    background-color: red;
+    color: white;
+}
+.form {
+    width: 80%;
+    background-color: #fff; /* White background */
+
+    /* border-radius: 8px; Rounded corners */
+    padding: 20px;
+}
+.form h1 {
+    text-align: center;
+    padding: 15px;
+    background-color: #4CAF50; /* Green background */
+    color: #fff; /* White text */
+    margin: 0;
+}
+
+
+.form input {
+    width: calc(100% - 24px); /* Adjusted width */
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded corners */
+}
+
+.form button {
+    width: calc(100% - 24px); /* Adjusted width */
+    display: block;
+    margin: 20px auto;
+    padding: 10px 15px;
+    border: none;
+    background-color: #4CAF50; /* Green background */
+    color: #fff; /* White text */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="table">
+        <h1>Student Data</h1>
+        <table border="1">
+
+            <thead>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Father's Name</th>
+                <th>Email</th>
+                <th>Aadhar Number</th>
+                <th>Address</th>
+                <th>Photo</th>
+                <th>Acction</th>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="form">
+        <h1>Student Application Form</h1>
+    <form action="">
+            <input type="text" id="name" placeholder="Name"><br>
+            <input type="email" id="email" placeholder="Email"><br>
+            <input type="text" id="fname" placeholder="Father's Name"><br>
+            <input type="number" id="aadhar" placeholder="Aadhar"><br>
+            <input type="text" id="address" placeholder="Address"> <br>
+            <input type="url" id="photo" placeholder="Photo"><br>
+            <button type="submit">Submit</button>
+    </form>
+    </div>
+</div>
+
+
+
+
+<script>
+    let arr = []
+    let url = "http://localhost:8080/students";
+
+    async function postdata(){
+        try {
+            let res = await fetch(url);
+            let value = await res.json()
+            arr= value
+            // postdata(arr)
+            console.log(arr);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    postdata(arr)
+
+
+
+    let form = document.querySelector("form");
+    form.addEventListener("submit" ,studentData);
+
+    async function studentData(e){
+        e.preventDefault();
+        let obj ={
+            name:document.getElementById("name").value,
+            fatherName:document.getElementById("fname").value,
+            email:document.getElementById("email").value,
+            aadhar:document.getElementById("aadhar").value,
+            address:document.getElementById("address").value,
+            photo:document.getElementById("photo").value,
+        }
+        if(obj.name=="" || obj.fatherName=="" || obj.email=="" || obj.aadhar ==" " || obj.address=="" || obj.photo ==""){
+            alert("Please Fill All field")
+            return
+        }
+        else{
+            console.log("success");
+        }
+        try {
+            let res = await axios.post(url,obj);
+
+
+        } catch (error) {
+console.log(error);
+        }
+     }
+
+
+     async function getData(){
+        try {
+            let responce = await axios.get("http://localhost:8080/students");
+            // console.log(responce, "142");
+            let allValue  = responce.data;
+            displayData(allValue)
+
+        } catch (error) {
+
+        }
+     }
+
+     getData()
+
+
+
+                 async function deleteData(id) {
+                try {
+                    let deleData = await axios.delete(
+                        `http://localhost:8080/students/${id}`
+                    );
+                    console.log(deleData);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+
+     let tbody = document.getElementById("tbody")
+
+function displayData(data) {
+    data.map((item) => {
+        let tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${item.id}</td>
+            <td>${item.name}</td>
+            <td>${item.fatherName}</td>
+            <td>${item.email}</td>
+            <td>${item.aadhar}</td>
+            <td>${item.address}</td>
+            <td><img src="${item.photo}" alt="Student Photo"></td>
+            <td class = "delete1"><button>Delete</button></td>`;
+            tr.querySelector(".delete1 button").addEventListener("click", () => {
+            deleteData(item.id);
+            alert("Deleted");
+
+
+        });
+        document.getElementById("tbody").appendChild(tr);
+    });
+}
+
+
+
+</script>
+</body>
+</html>

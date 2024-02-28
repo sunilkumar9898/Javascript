@@ -1,0 +1,76 @@
+{
+  "students": [
+    {
+      "id": "23a1",
+      "name": "Manjeet SIngh ",
+      "fatherName": "Gopal lal ",
+      "email": "PoojaKumari@gmail.com",
+      "aadhar": "456456456",
+      "address": "Jaipur",
+      "photo": "https://www.freecodecamp.org/news/content/images/size/w60/2023/08/WhatsApp_Image_2023-08-08_at_22.50.33-removebg-preview-1.png"
+    },
+    {
+      "id": "5e12",
+      "name": "Manjeet SIngh ",
+      "fatherName": "gopi",
+      "email": "Mannu@gmail.com",
+      "aadhar": "7896654564566",
+      "address": "Kota",
+      "photo": "https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c3R1ZGVudHxlbnwwfHwwfHx8MA%3D%3D"
+    },
+    {
+      "id": "b319",
+      "name": "Ramu Singh",
+      "fatherName": "ramesh",
+      "email": "ram@gmail.com",
+      "aadhar": "788998978787",
+      "address": "Bundi",
+      "photo": "https://images.unsplash.com/photo-1567168539593-59673ababaae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      "id": "4780",
+      "name": "Deependar",
+      "fatherName": "Deepanshu ",
+      "email": "Deep@gmail.com",
+      "aadhar": "78989787878787",
+      "address": "Sikar",
+      "photo": "https://images.unsplash.com/photo-1545696968-1a5245650b36?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      "id": "6cf4",
+      "name": "Shiv Kumar",
+      "fatherName": "sheev",
+      "email": "Sheeva@gmail.com",
+      "aadhar": "668787897897",
+      "address": "Alwar",
+      "photo": "https://images.unsplash.com/photo-1619279302118-43033660826a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzZ8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      "id": "d9d6",
+      "name": "Rahul Kumar",
+      "fatherName": "Rahul Kuamr",
+      "email": "rahul@gmail.com",
+      "aadhar": "78989897789789879",
+      "address": "Jhunjunu",
+      "photo": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      "id": "09d9",
+      "name": "Pooja Kumari",
+      "fatherName": "Gopal lal ",
+      "email": "PoojaKumari@gmail.com",
+      "aadhar": "45654645645",
+      "address": "Sikar",
+      "photo": "https://images.unsplash.com/photo-1567168539593-59673ababaae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      "id": "f010",
+      "name": "Girdhari Singh ",
+      "fatherName": "Ramkumar",
+      "email": "GIRDHARI@gmail.com",
+      "aadhar": "7897867546354",
+      "address": "Jaipur",
+      "photo": "https://plus.unsplash.com/premium_photo-1679162280486-8736450a253a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDl8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
+    }
+  ]
+}

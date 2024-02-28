@@ -8,6 +8,15 @@
       "Address": "jaipur",
       "nation": "India",
       "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png"
+    },
+    {
+      "id": "e786",
+      "name": "Manjeet SIngh ",
+      "email": "webdevlopersunil1997@gmail.com",
+      "phone": "78966455656",
+      "Address": "jaipur",
+      "nation": "India",
+      "url": "http://127.0.0.1:5500/Javascript/FEBRUARY/POSTAPI/index.html"
     }
   ]
 }
