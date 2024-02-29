@@ -241,13 +241,19 @@ function displayData(data) {
             <td>${item.aadhar}</td>
             <td>${item.address}</td>
             <td><img src="${item.photo}" alt="Student Photo"></td>
-            <td class = "delete1"><button>Delete</button></td>`;
-            tr.querySelector(".delete1 button").addEventListener("click", () => {
-            deleteData(item.id);
+            <td class = "delete1" id="delete"><button>Delete</button></td>`;
+        //     tr.querySelector(".delete1 button").addEventListener("click", () => {
+        //     deleteData(item.id);
+        //     alert("Deleted");
+
+
+        // });
+        let btn = tr.querySelector(" button");
+        btn.addEventListener("click",()=>{
+                deleteData(item.id);
             alert("Deleted");
+        })
 
-
-        });
         document.getElementById("tbody").appendChild(tr);
     });
 }

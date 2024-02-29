@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Post And Get Data By Api</title>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<style>
+/* Your existing CSS styles */
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="table">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+    </div>
+    <div class="form">
+        <form id="editForm">
+            Name :
+            <input class="input-icon" type="text" id="name" placeholder="Name" /><br />
+            Email :
+            <input type="text" id="email" placeholder="Email" /><br />
+            Mobile :
+            <input type="number" id="mobile" placeholder="Mobile" /><br />
+            City :
+            <input type="text" id="city" placeholder="City" /><br />
+            State :
+            <input type="text" id="state" placeholder="State" /><br />
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script>
+let url = "http://localhost:8080/data";
+let form = document.querySelector("form");
+form.addEventListener("submit", PostData);
+
+async function PostData(event) {
+    event.preventDefault();
+    let obj = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        mobile: document.getElementById("mobile").value,
+        city: document.getElementById("city").value,
+        state: document.getElementById("state").value,
+    };
+
+    if (
+        obj.name == "" ||
+        obj.email == "" ||
+        obj.mobile == "" ||
+        obj.city == "" ||
+        obj.state == ""
+    ) {
+        alert("Fill All Data");
+        return;
+    } else {
+        alert(`Student Data Successfully Submitted`);
+        // Assuming you have the ID available, replace '1' with the actual ID
+        await updateData(1); // Call updateData with the ID of the data you want to update
+    }
+
+    try {
+        let res = await axios.post(url, obj);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function updateData(id) {
+    try {
+        let editForm = document.getElementById("editForm");
+        let newData = {
+            name: editForm.querySelector("#name").value,
+            email: editForm.querySelector("#email").value,
+            mobile: editForm.querySelector("#mobile").value,
+            city: editForm.querySelector("#city").value,
+            state: editForm.querySelector("#state").value,
+        };
+        const response = await axios.patch(
+            `http://localhost:8080/data/${id}`, // Assuming your endpoint is correct
+            newData
+        );
+        console.log(response, "edit");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function GetData() {
+    try {
+        let responce = await axios.get(url);
+        let value = responce.data;
+        displayData(value);
+        // console.log(value);
+    } catch (error) {
+        console.log(error);
+    }
+}
+GetData();
+
+async function DeleteData(id) {
+    try {
+        let deldata = await axios.delete(
+            `http://localhost:8080/data/${id}`
+        );
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function getrowValue(data) {
+    document.getElementById("name").value = data.name;
+    document.getElementById("email").value = data.email;
+    document.getElementById("mobile").value = data.mobile;
+    document.getElementById("city").value = data.city;
+    document.getElementById("state").value = data.state;
+}
+
+const displayData = (data1) => {
+    data1.map((item) => {
+        let tr = document.createElement("tr");
+        let id1 = document.createElement("td"); // Corrected here
+        id1.innerText = item.id;
+        id1.classList.add("id");
+        let name = document.createElement("td");
+        name.innerText = item.name;
+        let email = document.createElement("td");
+        email.innerText = item.email;
+        let mobile = document.createElement("td");
+        mobile.innerText = item.mobile;
+        let city = document.createElement("td");
+        city.innerText = item.city;
+        let state = document.createElement("td");
+        state.innerText = item.state;
+        let btn = document.createElement("td");
+        let btn1 = document.createElement("button");
+        btn1.innerText = "delete";
+        btn1.addEventListener("click", () => {
+            DeleteData(item.id);
+        });
+        btn.append(btn1);
+        let btn2 = document.createElement("button");
+        btn2.innerText = "Edit";
+        btn2.style.backgroundColor = "green";
+        btn2.addEventListener("click", () => {
+            getrowValue(item);
+        });
+        btn.append(btn2);
+        tr.append(id1, name, email, mobile, city, state, btn, btnE); // Corrected here
+        tbody.append(tr);
+    });
+};
+
+</script>
+</body>
+</html>

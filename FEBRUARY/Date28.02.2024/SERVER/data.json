@@ -1,33 +1,6 @@
 {
   "students": [
     {
-      "id": "23a1",
-      "name": "Manjeet SIngh ",
-      "fatherName": "Gopal lal ",
-      "email": "PoojaKumari@gmail.com",
-      "aadhar": "456456456",
-      "address": "Jaipur",
-      "photo": "https://www.freecodecamp.org/news/content/images/size/w60/2023/08/WhatsApp_Image_2023-08-08_at_22.50.33-removebg-preview-1.png"
-    },
-    {
-      "id": "5e12",
-      "name": "Manjeet SIngh ",
-      "fatherName": "gopi",
-      "email": "Mannu@gmail.com",
-      "aadhar": "7896654564566",
-      "address": "Kota",
-      "photo": "https://images.unsplash.com/photo-1544717305-2782549b5136?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8c3R1ZGVudHxlbnwwfHwwfHx8MA%3D%3D"
-    },
-    {
-      "id": "b319",
-      "name": "Ramu Singh",
-      "fatherName": "ramesh",
-      "email": "ram@gmail.com",
-      "aadhar": "788998978787",
-      "address": "Bundi",
-      "photo": "https://images.unsplash.com/photo-1567168539593-59673ababaae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
-    },
-    {
       "id": "4780",
       "name": "Deependar",
       "fatherName": "Deepanshu ",
@@ -71,6 +44,33 @@
       "aadhar": "7897867546354",
       "address": "Jaipur",
       "photo": "https://plus.unsplash.com/premium_photo-1679162280486-8736450a253a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDl8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      "id": "d154",
+      "name": "Manjeet SIngh ",
+      "fatherName": "RamSwroop Jat",
+      "email": "man@gmail.com",
+      "aadhar": "78965412365",
+      "address": "Kota",
+      "photo": "https://images.unsplash.com/photo-1567168539593-59673ababaae?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      "id": "b8f4",
+      "name": "Sunil",
+      "fatherName": "Gopal lal ",
+      "email": "webdevlopersunil1997@gmail.com",
+      "aadhar": "8789797896789678",
+      "address": "6456456",
+      "photo": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
+    },
+    {
+      "id": "e162",
+      "name": "ramu singh",
+      "fatherName": "Gopal lal ",
+      "email": "Deep@gmail.com",
+      "aadhar": "79877787545",
+      "address": "6456456",
+      "photo": "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fHN0dWRlbnR8ZW58MHx8MHx8fDA%3D"
     }
   ]
 }
