@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": "3702",
+      "name": "Manjeet SIngh ",
+      "email": "webdevlopersunil1997@gmail.com",
+      "mobile": "9898985225",
+      "city": "Bundi",
+      "state": "rajasthan"
+    },
+    {
+      "id": "e687",
+      "name": "pooja Kumari ",
+      "email": "PoojaKumari@gmail.com",
+      "mobile": "9898985225",
+      "city": "Jaipur",
+      "state": "Uttar Pardesh"
+    },
+    {
+      "id": "2908",
+      "name": "ramu singh",
+      "email": "ram@gmail.com",
+      "mobile": "959862245",
+      "city": "Lucknow",
+      "state": "Uttar Pardesh"
+    },
+    {
+      "id": "b2ed",
+      "name": "Sunil Kumar",
+      "email": "webdevlopersunil1997@gmail.com",
+      "mobile": "9898985225",
+      "city": "Jaipur",
+      "state": "Uttar Pardesh"
+    }
+  ]
+}

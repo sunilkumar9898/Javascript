@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEllo Javascript</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            display: flex;
+            width: 50%;
+            margin: 50px auto;
+            justify-content: space-around;
+        }
+
+        .table{
+            width: 70%;
+            gap: 50px;
+        }
+        #container div{
+            display: flex;
+            gap: 50px;
+            padding: 20px;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" >
+        <div class="table" id="container">
+
+        </div>
+        <div class="form">
+            <form>
+                <input type="text" placeholder="name"  id="name"><br><br>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+
+
+    <script>
+        let form = document.querySelector("form");
+    form.addEventListener("submit", postData);
+
+        async function postData(event){
+        event.preventDefault();
+
+            let obj = {
+                name:document.getElementById("name").value,
+            };
+            try {
+                let responce = await axios.post("http://localhost:8080/data", obj)
+                console.log(responce);
+            } catch (error) {
+                  console.log(error);
+            }
+        }
+// postData()
+
+async function getData(){
+    try {
+        let res = await axios.get("http://localhost:8080/data")
+        console.log(res.data);
+        DisplayData(res.data)
+    } catch (error) {
+
+    }
+}
+
+async function deleteData(id){
+    try {
+let deldata = await axios.delete(`http://localhost:8080/data/${id}`)
+    } catch (error) {
+console.log(error);
+    }
+}
+getData();
+
+
+
+let container = document.getElementById("container");
+const DisplayData = (value)=>{
+    value.map((item)=>{
+        let div = document.createElement("div")
+        let name = document.createElement("p")
+        let btn = document.createElement("button")
+        btn.innerText ="delete"
+        btn.addEventListener("click",()=>{
+            deleteData(item.id)
+        })
+        name.innerText = item.name
+        div.append(name,btn)
+        container.append(div)
+    })
+}
+
+    </script>
+
+
+</body>
+</html>

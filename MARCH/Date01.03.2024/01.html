@@ -148,90 +148,91 @@
                 </form>
             </div>
         </div>
+<script>
+    let userId = null;
+    let url = "http://localhost:8080/data"
+    async function postData(){
 
-        <script>
-            let userId = null; //for edit
-            console.log(userId, "154");
+        let obj = {
+            name:document.getElementById("name").value,
+            email:document.getElementById("email").value,
+            mobile:document.getElementById("mobile").value,
+            city:document.getElementById("city").value,
+            state:document.getElementById("state").value
+        }
+        try {
+            let res = await axios.post(url,obj);
+            console.log(res);
 
-            let url = "http://localhost:8080/data";
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-            async function PostData() {
-                let obj = {
-                    name: document.getElementById("name").value,
-                    email: document.getElementById("email").value,
-                    mobile: document.getElementById("mobile").value,
-                    city: document.getElementById("city").value,
-                    state: document.getElementById("state").value,
-                };
 
-                try {
-                    let res = await axios.post(url, obj);
-                    alert(`${obj.name} Data Successfully Submited`);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-            // <--------------for edit--------------->
-            // get value in form input on click edit button
-            function getRowData(data) {
-                userId = data.id;
-                document.getElementById("name").value = data.name;
-                document.getElementById("email").value = data.email;
-                document.getElementById("mobile").value = data.mobile;
-                document.getElementById("city").value = data.city;
-                document.getElementById("state").value = data.state;
-                document.getElementById("submit").innerText = "Save";
-            }
-            async function updateData() {
-                let newdata = {
-                    name: document.getElementById("name").value,
-                    email: document.getElementById("email").value,
-                    mobile: document.getElementById("mobile").value,
-                    city: document.getElementById("city").value,
-                    state: document.getElementById("state").value,
-                };
+    async function getData(){
+        try {
+            let responce = await axios.get(url)
+            console.log(responce.data);
+            displayData(responce.data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    getData()
 
-                try {
-                    let res = await axios.patch(`${url}/${userId}`, newdata);
-                    alert(`${newdata.name} data Successfully Updated`);
-                    console.log(res);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
+    async function delData(id){
+        try {
+            let delDataa = await axios.delete(`http://localhost:8080/data/${id}`)
+        } catch (error) {
 
-            let form = document.querySelector("form");
-            form.addEventListener("submit", (event) => {
-                event.preventDefault();
-                if (userId) {
-                    updateData();
-                } else {
-                    PostData();
-                }
-            });
+        }
 
-            async function GetData() {
-                try {
-                    let responce = await axios.get(url);
-                    let value = responce.data;
-                    displayData(value);
-                    // console.log(value);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-            GetData();
+    }
 
-            async function DeleteData(id) {
-                try {
-                    let deldata = await axios.delete(`${url}/${id}`);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-            // this function is only used for get value in form input
 
-            let tbody = document.getElementById("tbody");
+    async function  getRowData(data){
+        userId = data.id;
+        console.log(userId);
+        document.getElementById("name").value = data.name;
+        document.getElementById("email").value = data.email;
+        document.getElementById("mobile").value = data.mobile;
+        document.getElementById("city").value = data.city;
+        document.getElementById("state").value = data.state;
+        document.getElementById("submit").innerHTML ="Save";
+
+    }
+
+
+    async function UpdatedData(){
+        let newArr = {
+            name:document.getElementById("name").value,
+            email:document.getElementById("email").value,
+            mobile:document.getElementById("mobile").value,
+            city:document.getElementById("city").value,
+            state:document.getElementById("state").value
+        }
+        try {
+            let responce1 = await axios.patch(`${url}/${userId}`,newArr)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    let form = document.querySelector("form");
+    form.addEventListener("submit", (e)=>{
+        e.preventDefault()
+        if(userId){
+            UpdatedData()
+        }else{
+            postData()
+        }
+    })
+
+
+
+
+
+        let tbody = document.getElementById("tbody");
             const displayData = (data1) => {
                 data1.map((item) => {
                     let tr = document.createElement("tr");
@@ -256,7 +257,7 @@
                     let btn1 = document.createElement("button");
                     btn1.innerText = "delete";
                     btn1.addEventListener("click", () => {
-                        DeleteData(item.id);
+                        delData(item.id);
                     });
                     btn.append(btn1);
 
@@ -271,7 +272,6 @@
                     tbody.append(tr);
                 });
             };
-            // displayData();
-        </script>
+</script>
     </body>
 </html>
