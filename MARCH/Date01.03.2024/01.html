@@ -103,6 +103,13 @@
                     width: 80%;
                 }
             }
+
+            #msg {
+                color: red;
+                text-align: center;
+                padding: 0px 0px 2px 0px;
+                visibility: hidden;
+            }
         </style>
     </head>
     <body>
@@ -127,6 +134,8 @@
             <div class="form">
                 <!-- <h1>Data Entry</h1> -->
                 <form>
+                    <p id="msg">Success</p>
+                    <br />
                     Name :
                     <input
                         class="input-icon"
@@ -148,91 +157,95 @@
                 </form>
             </div>
         </div>
-<script>
-    let userId = null;
-    let url = "http://localhost:8080/data"
-    async function postData(){
+        <script>
+            let arr =JSON.parse(localStorage.getItem("datajsonserver")) || []
+            let userId = null;
+            let url = "http://localhost:8080/data";
+            async function postData() {
+                let obj = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    mobile: document.getElementById("mobile").value,
+                    city: document.getElementById("city").value,
+                    state: document.getElementById("state").value,
+                };
+                arr.push(obj)
+                localStorage.setItem("datajsonserver",JSON.stringify(arr))
+                if(obj.name=="" || obj.email=="" || obj.mobile=="" || obj.city=="" || obj.state==""){
+                    alert("Please Fill  all Field")
+                    return
+                }
+                try {
+                    let res = await axios.post(url, obj);
+                    alert("succefully submited")
+                    console.log(res);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
 
-        let obj = {
-            name:document.getElementById("name").value,
-            email:document.getElementById("email").value,
-            mobile:document.getElementById("mobile").value,
-            city:document.getElementById("city").value,
-            state:document.getElementById("state").value
-        }
-        try {
-            let res = await axios.post(url,obj);
-            console.log(res);
+            async function getData() {
+                try {
+                    let responce = await axios.get(url);
+                    console.log(responce.data);
+                    displayData(responce.data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            getData();
 
-        } catch (error) {
-            console.log(error);
-        }
-    }
+            async function delData(id) {
+                try {
+                    let delDataa = await axios.delete(
+                        `http://localhost:8080/data/${id}`
+                    );
+                } catch (error) {}
+            }
 
+            async function getRowData(data) {
+                userId = data.id;
+                console.log(userId);
+                document.getElementById("name").value = data.name;
+                document.getElementById("email").value = data.email;
+                document.getElementById("mobile").value = data.mobile;
+                document.getElementById("city").value = data.city;
+                document.getElementById("state").value = data.state;
+                document.getElementById("submit").innerHTML = "Save";
+            }
 
-    async function getData(){
-        try {
-            let responce = await axios.get(url)
-            console.log(responce.data);
-            displayData(responce.data)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    getData()
+            async function UpdatedData() {
+                let newArr = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    mobile: document.getElementById("mobile").value,
+                    city: document.getElementById("city").value,
+                    state: document.getElementById("state").value,
+                };
+                try {
+                    let responce1 = await axios.patch(
+                        `${url}/${userId}`,
+                        newArr
+                    );
+                    alert("succefully submited Updated data")
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            let form = document.querySelector("form");
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                if (userId) {
+                    UpdatedData();
+                } else {
+                    let a = (document.getElementById("msg").style.display =
+                        "visible");
 
-    async function delData(id){
-        try {
-            let delDataa = await axios.delete(`http://localhost:8080/data/${id}`)
-        } catch (error) {
+                    postData();
+                }
+            });
 
-        }
-
-    }
-
-
-    async function  getRowData(data){
-        userId = data.id;
-        console.log(userId);
-        document.getElementById("name").value = data.name;
-        document.getElementById("email").value = data.email;
-        document.getElementById("mobile").value = data.mobile;
-        document.getElementById("city").value = data.city;
-        document.getElementById("state").value = data.state;
-        document.getElementById("submit").innerHTML ="Save";
-
-    }
-
-
-    async function UpdatedData(){
-        let newArr = {
-            name:document.getElementById("name").value,
-            email:document.getElementById("email").value,
-            mobile:document.getElementById("mobile").value,
-            city:document.getElementById("city").value,
-            state:document.getElementById("state").value
-        }
-        try {
-            let responce1 = await axios.patch(`${url}/${userId}`,newArr)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    let form = document.querySelector("form");
-    form.addEventListener("submit", (e)=>{
-        e.preventDefault()
-        if(userId){
-            UpdatedData()
-        }else{
-            postData()
-        }
-    })
-
-
-
-
-
-        let tbody = document.getElementById("tbody");
+            let tbody = document.getElementById("tbody");
             const displayData = (data1) => {
                 data1.map((item) => {
                     let tr = document.createElement("tr");
@@ -241,6 +254,9 @@
                     id1.classList.add("id");
                     let name = document.createElement("td");
                     name.innerText = item.name;
+                    if(item.name=="suresh kumar"){
+                        name.style.color="red"
+                    }
                     let email = document.createElement("td");
                     email.innerText = item.email;
 
@@ -272,6 +288,6 @@
                     tbody.append(tr);
                 });
             };
-</script>
+        </script>
     </body>
 </html>

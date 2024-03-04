@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hello Crud operation</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                width: 80%;
+                margin: 80px auto;
+            }
+
+            .form {
+                width: 70%;
+            }
+            .form form {
+                width: 90%;
+                margin: auto;
+            }
+            .form form input {
+                width: 90%;
+                padding: 9px;
+                border-radius: 5px;
+            }
+            .form form button {
+                display: flex;
+                margin: auto;
+                padding: 8px 12px;
+                cursor: pointer;
+                border: none;
+                outline: none;
+            }
+
+            .table {
+                width: 100%;
+                /* margin: auto; */
+            }
+            .table table {
+                width: 90%;
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="form">
+                <form>
+                    <input
+                        type="text"
+                        placeholder="name"
+                        id="name" /><br /><br />
+                    <input
+                        type="email"
+                        placeholder="email"
+                        id="email" /><br /><br />
+                    <input
+                        type="text"
+                        placeholder="city"
+                        id="city" /><br /><br />
+                    <button type="submit" id="btn">Submit</button>
+                </form>
+            </div>
+            <div class="table">
+                <table border="1">
+                    <thead>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>City</th>
+                        <th>Action</th>
+                    </thead>
+                        <tbody id="tbody"  >
+
+                </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <script>
+            let userId = null;
+            let url = "http://localhost:8080/data";
+            let form = document.querySelector("form");
+
+
+            async function postData() {
+
+                let obj = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    city: document.getElementById("city").value,
+                };
+                try {
+                    let res = await axios.post(url, obj);
+                        // await getData();
+                } catch (error) {
+                    console.log(error);
+                }
+
+            }
+
+
+
+        async function getData() {
+            try {
+                let response = await axios.get(url);
+                console.log(response.data);
+                DisplayData(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getData()
+
+            async function getRowData(data){
+                userId=data.id;
+                document.getElementById("name").value = data.name;
+                document.getElementById("email").value = data.email;
+                document.getElementById("city").value = data.city;
+                document.getElementById("btn").innerText="save"
+
+            }
+
+            async function UpdatedData(){
+                        let obj = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    city: document.getElementById("city").value,
+                };
+                try {
+                    let res = await axios.patch(`${url}/${userId}`,obj);
+                        // await getData();
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+    form.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        if(userId){
+            UpdatedData()
+        }else{
+            postData()
+        }
+    });
+
+
+
+    async function deletedat(id){
+        try {
+            let delData = await axios.delete(`http://localhost:8080/data/${id}`)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+            let tbody = document.getElementById("tbody");
+            function DisplayData(data){
+                tbody.innerHTML = "";
+                data.map((item)=>{
+                    let tr = document.createElement("tr");
+
+                    let name = document.createElement("td");
+                    name.innerText = item.name;
+
+
+                    let email = document.createElement("td");
+                    email.innerText = item.email;
+
+
+                    let city = document.createElement("td");
+                    city.innerText = item.city;
+
+
+                    let btn = document.createElement("td");
+                    let buttn = document.createElement("button")
+                    let updated = document.createElement("button")
+                    updated.innerText = "updated"
+                    updated.addEventListener("click",()=>{
+                        getRowData(item)
+                    })
+                    buttn.innerText="Delete";
+                    buttn.addEventListener("click",(id)=>{
+                        deletedat(item.id)
+                    })
+                    btn.append(buttn,updated)
+
+                    tr.append(name,email,city,btn)
+
+
+                    tbody.append(tr)
+                })
+            }
+
+        </script>
+    </body>
+</html>
