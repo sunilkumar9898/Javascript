@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <style>
+            * {
+                margin: 0;
+
+                padding: 0;
+                box-sizing: border-box;
+            }
+            nav {
+                background-color: rgba(0, 0, 0, 0.76);
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                position: sticky;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+            .logo {
+                width: 50%;
+            }
+            .logo img{
+                width: 8%;
+            }
+            .Searchbar{
+                width: 100%;
+            }
+
+            .Searchbar input{
+                width:50%;
+                padding: 10px;
+                border-radius: 20px;
+                border: none;
+            }
+
+            .login button{
+                padding: 8px 20px;
+                border: none;
+                cursor: pointer;
+
+                background-color: #69c7e7;
+            }
+
+            .filter {
+                margin: 100px auto;
+                text-align: center;
+            }
+
+            #filter {
+                width: 50%;
+                border: none;
+                padding: 8px;
+                margin: 10px 0px;
+            }
+
+            #sort {
+                width: 50%;
+                border: none;
+                padding: 8px;
+                margin: 10px 0px;
+            }
+            #container {
+                display: flex;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .thumbnail {
+                flex: 1 1 50px;
+                color: rgb(17, 6, 6);
+                background-color: rgba(82, 79, 79, 0.604);
+            }
+            .content {
+                flex: 2 1 300px;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 50px;
+                width: 90%;
+                margin: 10px 50px;
+            }
+            .content div {
+                text-align: center;
+                background-color: aliceblue;
+                box-shadow: 0px 0px 5px rgb(238, 235, 235);
+            }
+            .content div img{
+                width: 20%;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <div class="logo"><img src="logogo.png" alt=""></div>
+            <div class="Searchbar">
+                <input type="text" placeholder="Searchbar" />
+            </div>
+            <div class="login"><button>LogIn</button></div>
+        </nav>
+        <div class="container">
+            <div id="container">
+                <div class="thumbnail">
+                    <div class="filter">
+                        <div>
+                            <h1>Filter by Category</h1>
+                            <select name="" id="filter">
+                                <option value="">----Select----</option>
+                                <option value="Clothes">Clothes</option>
+                                <option value="Miscellaneous">
+                                    Miscellaneous
+                                </option>
+                                <option value="Furniture">Furniture</option>
+                                <option value="Shoes">Shoes</option>
+                                <option value="Electronics">Electronic</option>
+                            </select>
+                        </div>
+                        <div>
+                            <h1>Sort By Price</h1>
+                            <select name="" id="sort">
+                                <option value="">----Select----</option>
+                                <option value="LTH">LTH</option>
+                                <option value="HTL">HTL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="content" id="content"></div>
+            </div>
+        </div>
+
+        <script>
+
+
+            let arr;
+            async function getValue() {
+                try {
+                    let res = await axios.get("https://fakestoreapi.com/products");
+                    arr = res.data;
+                    console.log(arr);
+                    displayData(arr);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+
+            // -------------- filter Data -----------------
+            let filter = document.getElementById("filter");
+            filter.addEventListener("change", filterFunction);
+
+            function filterFunction() {
+                let filterValue = document.getElementById("filter").value;
+                console.log(filterValue);
+                if (filterValue == "") {
+                    displayData(arr);
+                } else {
+                    let filterData = arr.filter((item) => {
+                        return item.category.name === filterValue;
+                    });
+            console.log("Filtered data:", filterData);
+                    displayData(filterData)
+                }
+            }
+
+
+
+
+            // -----------------sort ----------------
+
+
+            let sort = document.getElementById("sort");
+            sort.addEventListener("change" , sortFunction)
+
+            function sortFunction(){
+                let sortValue = document.getElementById("sort").value;
+                if(sortValue == ""){
+                    displayData(arr)
+                }else{
+                    let sortData;
+                    if(sortValue == "LTH"){
+                        sortData = arr.slice().sort((a, b)=>{
+                            return a.price - b.price
+                        })
+                    }else if(sortValue == "HTL"){
+                        sortData = arr.slice().sort((a, b)=>{
+                            return b.price - a.price
+                        })
+                    }
+                    displayData(sortData)
+                }
+            }
+
+            let container = document.getElementById("content");
+            function displayData(data) {
+                data.map((item) => {
+
+                    let div = document.createElement("div");
+                    let id = document.createElement("p");
+                    id.innerText = item.id;
+
+                    let title = document.createElement("p");
+                    title.innerText = item.title;
+
+                    let price = document.createElement("p");
+                    price.innerText = item.price;
+
+                    let description = document.createElement("p");
+                    description.innerText = item.description;
+                    
+
+                    let image = document.createElement("img");
+                    image.src = item.image;
+
+
+                    div.append(
+                        id,
+                        title,
+                        price,
+                        description,
+                        image,
+
+                    );
+                    container.append(div);
+                });
+            }
+                        getValue();
+        </script>
+    </body>
+</html>

@@ -138,6 +138,7 @@ box-shadow: rgba(64, 227, 5, 0.56) 0px 22px 70px 4px;
         @media (max-width: 768px) {
             .nav {
                 display: none;
+                
                 flex-direction: column;
                 position: absolute;
                 top: 60px; /* Adjust as needed */

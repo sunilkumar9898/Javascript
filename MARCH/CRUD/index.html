@@ -5,12 +5,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Hello Crud operation</title>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
 
         <style>
             * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
+                font-size: clamp(12px,2em,15px);
+
+            }
+            body{
+                background-color: rgba(73, 114, 237, 0.556);
             }
             .container {
                 display: grid;
@@ -21,15 +29,35 @@
 
             .form {
                 width: 70%;
+                height:50vh;
+
+                background-image: url("https://images.unsplash.com/photo-1543269664-7eef42226a21?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHN0dWRlbnQlMjB3aXRoJTIwbGFwdG9wfGVufDB8fDB8fHww");
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: top;
+                border-radius: 10px;
             }
             .form form {
                 width: 90%;
-                margin: auto;
+                margin:60px auto;
+                background-color: rgba(40, 34, 34, 0.608);
+                border-radius: 8px;
+                padding: 20px 0px;
+
             }
             .form form input {
                 width: 90%;
                 padding: 9px;
+                display: flex;
+                margin: auto;
                 border-radius: 5px;
+                border: none;
+                outline: none;
+                background-color: rgba(74, 79, 74, 0.668);
+                color: white;
+            }
+            input::placeholder{
+                color: rgb(255, 255, 255);
             }
             .form form button {
                 display: flex;
@@ -37,23 +65,94 @@
                 padding: 8px 12px;
                 cursor: pointer;
                 border: none;
-                outline: none;
+                border-radius: 8px;
+
+            }
+     form button:hover{
+                transform: scale(1.05);
+                transition: .2s ease-in-out;
+                background-color: rgba(13, 206, 13, 0.628);
+                color: white;
+                border-radius: 8px;
             }
 
             .table {
                 width: 100%;
-                /* margin: auto; */
             }
             .table table {
                 width: 90%;
                 margin: auto;
+                text-align: center;
+                border-collapse: collapse;
             }
+             table thead tr th{
+                background-color: rgb(33, 28, 28);
+                color: white;
+                padding: 10px;
+            }
+                #tbody tr td{
+                    padding: 10px;
+                }
+            #tbody tr td button{
+                padding: 8px;
+                border: none;
+                margin: 4px 10px;
+
+            }
+
+            #tbody tr td button:nth-child(1){
+                background-color: rgb(248, 6, 6);
+                color: rgb(15, 1, 1);
+                border-radius: 5px;
+                cursor: pointer;
+                padding: 5px;
+                transition: .2s ease-out;
+            }
+                    #tbody tr td button:nth-child(2){
+                background-color: rgb(248, 130, 4);
+                color: black;
+                border-radius: 5px;
+                cursor: pointer;
+                padding: 5px;
+                transition: .2s ease-out;
+
+            }
+            #tbody tr td button:nth-child(1):hover{
+                box-shadow: 0px 0px 20px rgba(242, 2, 2, 0.946);
+                transform: scale(1.05);
+            }
+                #tbody tr td button:nth-child(2):hover{
+                box-shadow: 0px 0px 20px rgba(242, 130, 2, 0.946);
+                transform: scale(1.05);
+            }
+            #tbody tr:nth-child(odd){
+                background-color: antiquewhite;
+            }
+            #tbody tr:nth-child(even){
+                background-color: rgb(190, 190, 201);
+            }
+
+
+
+        .error-message {
+    visibility: hidden;
+    background-color: rgba(255, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 90%;
+    margin: 5px auto;
+
+}
+
+
         </style>
     </head>
     <body>
         <div class="container">
             <div class="form">
                 <form>
+                    <h1 id="error" class="error-message">error</h1>
                     <input
                         type="text"
                         placeholder="name"
@@ -72,10 +171,10 @@
             <div class="table">
                 <table border="1">
                     <thead>
-                        <th>Name</th>
+                    <tr>    <th>Name</th>
                         <th>Email</th>
                         <th>City</th>
-                        <th>Action</th>
+                        <th>Action</th></tr>
                     </thead>
                         <tbody id="tbody"  >
 
@@ -98,6 +197,21 @@
                     email: document.getElementById("email").value,
                     city: document.getElementById("city").value,
                 };
+                      if (obj.name === "" || obj.email === "" || obj.city === "") {
+                  document.getElementById("error").style.visibility = "visible";
+        setTimeout(() => {
+            document.getElementById("error").style.visibility = "hidden";
+        }, 4000);
+                    return;
+                } else  {
+        document.getElementById("error").style.visibility = "visible";
+        document.getElementById("error").style.backgroundColor = "green";
+        document.getElementById("error").innerText = "Success";
+        setTimeout(() => {
+            document.getElementById("error").style.visibility = "hidden";
+            console.log("success");
+        }, 10000);
+                }
                 try {
                     let res = await axios.post(url, obj);
                         // await getData();
@@ -106,6 +220,7 @@
                 }
 
             }
+
 
 
 
@@ -135,9 +250,15 @@
                     email: document.getElementById("email").value,
                     city: document.getElementById("city").value,
                 };
+                      if (obj.name === "" || obj.email === "" || obj.city === "") {
+                    alert("Error: Please fill in all fields.");
+                    return;
+                }
                 try {
                     let res = await axios.patch(`${url}/${userId}`,obj);
                         // await getData();
+                alert("Success: Data submitted successfully.");
+
                 } catch (error) {
                     console.log(error);
                 }
@@ -148,7 +269,10 @@
         if(userId){
             UpdatedData()
         }else{
-            postData()
+
+        postData()
+
+
         }
     });
 
@@ -157,6 +281,7 @@
     async function deletedat(id){
         try {
             let delData = await axios.delete(`http://localhost:8080/data/${id}`)
+            alert("data delted")
         } catch (error) {
             console.log(error);
         }
@@ -184,11 +309,11 @@
                     let btn = document.createElement("td");
                     let buttn = document.createElement("button")
                     let updated = document.createElement("button")
-                    updated.innerText = "updated"
+                    updated.innerHTML = '<i class="fas fa-edit"></i>'
                     updated.addEventListener("click",()=>{
                         getRowData(item)
                     })
-                    buttn.innerText="Delete";
+                    buttn.innerHTML = '<i class="fas fa-trash-alt"></i>';
                     buttn.addEventListener("click",(id)=>{
                         deletedat(item.id)
                     })

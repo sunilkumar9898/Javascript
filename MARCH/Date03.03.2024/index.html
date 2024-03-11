@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Hello Javascript </title>
+</head>
+<body>
+    <div class="container">
+        <form id="form">
+            <input type="text" placeholder="name"><br><br>
+            <input type="email" placeholder="email"><br><br>
+            <button type="submit">Submit</button>
+
+        </form>
+    </div>
+    <div class="box">
+        <ol>
+            <li>Sr.No</li>
+            <li>Name</li>
+            <li>Address</li>
+            <li>City</li>
+            <li>State</li>
+        </ol>
+    </div>
+
+
+    <script>
+
+        setTimeout(() => {
+            // alert("success")
+            let div = document.getElementById("form")
+            div.style.backgroundColor="red"
+        },5000);
+    </script>
+</body>
+</html>
