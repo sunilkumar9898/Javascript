@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Cart Data</title>
+    <style>
+             * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-rows: auto;
+            gap: 20px;
+            width: 95%;
+            margin: 50px auto;
+            place-content: center; /* Center the grid content horizontally and vertically */
+        }
+
+        #container div {
+            box-shadow: 0px 0px 5px gray;
+            padding: 15px;
+        }
+
+        #container div img {
+            width: 50%;
+            display: flex;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px auto;
+            -webkit-text-stroke: 1px rgb(234, 13, 242);
+            color: transparent;
+            font-size: 35px;
+        }
+
+    
+
+    </style>
+</head>
+<body>
+    <h1>Add To Cart Data </h1>
+    <div id="container"></div>
+
+
+    <script>
+let arr = JSON.parse(localStorage.getItem("cartData"))
+console.log(arr);
+
+
+
+            let container = document.getElementById("container");
+            function displayData(data) {
+                container.innerHTML = "";
+                data.map((item) => {
+                    let div = document.createElement("div");
+                    let category = document.createElement("p");
+                    category.innerText = item.category;
+
+                    let description = document.createElement("p");
+                    description.innerText = item.description.split(" ").slice(0, 10).join(" ") + "..............";
+
+                    let id = document.createElement("p");
+                    id.innerText = item.id;
+
+                    let image = document.createElement("img");
+                    image.src = item.image;
+
+                    let price = document.createElement("p");
+                    price.innerText = item.price;
+
+                    let rating = document.createElement("p");
+                    rating.innerText = item.rating.rate;
+
+                    let title = document.createElement("p");
+                    title.innerText = item.title;
+
+                    div.append(id,image,description,category,price,rating,price);
+                    container.append(div);
+                });
+            }
+
+            displayData(arr)
+    </script>
+</body>
+</html>
