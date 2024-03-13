@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <style>
+            nav {
+                display: flex;
+                justify-content: space-between;
+                /* border: 1px solid green; */
+                /* padding: 10px; */
+                background-color: black;
+                color: white;
+                align-items: center;
+                position: sticky;
+                top: 0;
+            }
+            #cart {
+                color: red;
+                font-weight: bold;
+            }
+            nav img {
+                width: 20%;
+                padding: 5px;
+            }
+            .search_bar {
+                width: 20%;
+                display: flex;
+                justify-content: space-evenly;
+            }
+            .nav_link {
+                display: flex;
+                justify-content: space-between;
+                /* border: 1px solid green; */
+                width: 30%;
+            }
+            a {
+                text-decoration: none;
+                color: white;
+            }
+            .btn_cart {
+                padding: 5px;
+            }
+            #container {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 20px;
+            }
+            #container div {
+                text-align: center;
+                padding: 10px;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            }
+            #container div img {
+                width: 50%;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <div>
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHQGdaIn7hjn3NWLZximOTni6fG_N6kk9Ban6KhTLtfA&s"
+                    alt="" />
+            </div>
+            <div class="nav_link">
+                <a href="">Home</a>
+                <a href="">About</a>
+                <a href="">Services</a>
+                <a href="">Contact</a>
+            </div>
+            <div class="search_bar">
+                <input type="search" placeholder="Search" />
+                <button class="btn_cart">
+                    <!-- <a link="" id="cart"><a> -->
+                    <a id="cart" href="./cart.html">🛒:0</a>
+                </button>
+            </div>
+        </nav>
+        <div id="container"></div>
+    </body>
+    <script>
+        let arr;
+        let cartData = JSON.parse(localStorage.getItem("cart")) || [];
+
+        async function getValue() {
+            try {
+                let res = await axios.get("https://fakestoreapi.com/products");
+                arr = res.data;
+                console.log(arr);
+                displayData(arr);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getValue();
+        let container = document.getElementById("container");
+        function displayData(data) {
+            container.innerHTML = "";
+            data.map((item) => {
+                let div = document.createElement("div");
+                let category = document.createElement("p");
+                category.innerText = item.category;
+
+                let description = document.createElement("p");
+                description.innerText =
+                    item.description.split(" ").slice(0, 5).join(" ") +
+                    "..............";
+
+                let id = document.createElement("p");
+                id.innerText = item.id;
+
+                let image = document.createElement("img");
+                image.src = item.image;
+
+                let price = document.createElement("p");
+                price.innerText = item.price;
+
+                let rating = document.createElement("p");
+                rating.innerText = item.rating.rate;
+
+                let title = document.createElement("p");
+                title.innerText = item.title;
+
+                let btn = document.createElement("button");
+                btn.innerText = "Add To Cart";
+                btn.addEventListener("click", () => {
+                    addToCart(item);
+                updateCartQuantity()
+                });
+
+                div.append(
+                    id,
+                    image,
+                    description,
+                    category,
+                    price,
+                    rating,
+                    price,
+                    btn
+                );
+                container.append(div);
+            });
+        }
+
+        // <---------Add to cart----->
+
+        // function addToCart(data) {
+        //     let cartValue = JSON.parse(localStorage.getItem("cart")) || [];
+        //     cartValue.push(data);
+        //     localStorage.setItem("cart", JSON.stringify(cartValue));
+        //     if(data.id){
+        //         alert("already")
+        //     }else{
+        //     localStorage.setItem("cart", JSON.stringify(cartValue));
+        //     alert("add to cart 🎉🎊");
+
+        //     }
+        // }
+
+        function addToCart(data) {
+            let cartValue = JSON.parse(localStorage.getItem("cart")) || [];
+            let isAlreadyInCart = cartValue.some((item) => item.id === data.id);
+
+            if (isAlreadyInCart) {
+                alert("Item already in cart");
+            } else {
+                cartValue.push(data);
+                localStorage.setItem("cart", JSON.stringify(cartValue));
+                alert("Item added to cart 🎉🎊");
+                updateCartQuantity()
+            }
+        }
+
+        // <-----------Cart length------>
+        function updateCartQuantity() {
+            let cart = document.getElementById("cart");
+            cart.innerText = `🛒:${cartData.length}`;
+        }
+    </script>
+</html>
