@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Fiter & Sort Method</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort & Filter & Search </title>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <style>
-            * {
+                * {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
@@ -117,14 +117,15 @@
             }
     }
 
-
         </style>
-    </head>
-    <body>
-        <nav>
-            <div class="logo"><img src="images-removebg-preview.png" alt=""></div>
+
+</head>
+<body>
+    <nav>
+            <div class="logo"><img src="../SORT&FILTER/images-removebg-preview.png" alt=""></div>
             <div class="flex"><input class="serch" type="text" id="search" placeholder="Search"><a href="cart.html"><span id="cartIcon">&#128722;</span></a></div>
         </nav>
+        <div id="count">count</div>
         <div class="select">
             <select name="" id="filter">
                 <option value="" id="sele">--Filter---</option>
@@ -144,87 +145,83 @@
 
         <div class="container" id="container"></div>
 
-        <script>
-
-            let arr;
-            let cartCounter = 0; // Counter variable to track items added to cart
-            async function getValue() {
-                try {
-                    let res = await axios.get(
-                        "https://fakestoreapi.com/products"
-                    );
-                    arr = res.data;
-                    console.log(arr);
-                    displayData(arr);
-                } catch (error) {
-                    console.log(error);
-                }
-            }
-            getValue();
-
-            // --------filter--------------
-            let filter = document.getElementById("filter");
-            filter.addEventListener("change", filterFunction);
-
-            function filterFunction() {
-                let filterValue = document.getElementById("filter").value;
-                console.log(filterValue);
-                if (filterValue == "") {
-                    displayData(arr);
-                } else {
-                    let filterData = arr.filter((item) => {
-                        return item.category == filterValue;
-                    });
-                    displayData(filterData);
-                }
-            }
-            // -------------------sort------------
-
-            let sort = document.getElementById("sort");
-            sort.addEventListener("change", sortFunction);
-
-            function sortFunction() {
-                let sortValue = document.getElementById("sort").value;
-                if (sortValue == "") {
-                    displayData(arr);
-                } else {
-                    let sortData;
-                    if (sortValue == "LTH") {
-                        sortData = arr.slice().sort((a, b) => {
-                            return a.price - b.price;
-                        });
-                    } else if (sortValue == "HTL") {
-                        sortData = arr.slice().sort((a, b) => {
-                            return b.price - a.price;
-                        });
-                    }
-                    displayData(sortData);
-                }
-            }
-
-            // --------------------Search ------------------------
-            let serch =document.getElementById("search");
-            serch.addEventListener("input", searchFunction)
-
-            function searchFunction(){
-                let searchvalue = document.getElementById("search").value
-
-                let searchData = arr.filter((item)=>{
-                    return item.category.toLowerCase().includes(searchvalue)
-                })
-                displayData(searchData)
-            }
+<script>
+    let arr;
+    let count= 0;
+async function getValue(){
+    try {
+        let res = await axios.get("https://fakestoreapi.com/products")
+        arr = res.data;
+        console.log(arr);
+        displayData(arr)
+    } catch (error) {
+console.log(error);
+    }
+}
 
 
+// <-------------filter----------------->
+
+let filter = document.getElementById("filter")
+filter.addEventListener("change" ,filterFunction)
+
+function filterFunction(){
+    let filterValue = document.getElementById("filter").value;
+    console.log(filterValue);
+    if(filterValue ==""){
+        displayData(arr)
+    }else{
+        // let filterData;
+        filterData = arr.filter((item)=>{
+            return item.category == filterValue;
+        })
+        displayData(filterData)
+    }
+}
 
 
-                   function updateCartCounter() {
-            // Update the cart icon with the new counter value
-            let cartIcon = document.getElementById("cartIcon");
-            cartIcon.innerText = `🛒 ${cartCounter}`;
+// <---------------soting------------------->
+
+let sort = document.getElementById("sort")
+sort.addEventListener("change" , sortFunction)
+
+function sortFunction(){
+    let sortValue = document.getElementById("sort").value
+    if(sortValue==""){
+        displayData(arr)
+    }
+    else{
+        let sortdata;
+        if(sortValue=="LTH"){
+            sortdata = arr.slice().sort((a,b)=>{
+                return a.price - b.price
+            })
+        }else if(sortValue=="HTL"){
+            sortdata = arr.slice().sort((a,b)=>{
+                return b.price - a.price
+            })
         }
+        displayData(sortdata)
+    }
+}
 
 
+//  <---------------SearchData------------------>
+
+let search = document.getElementById("search");
+search.addEventListener("input" , searchFunction);
+
+function searchFunction(){
+    let searchvalue = document.getElementById("search").value;
+    console.log(searchvalue);
+    searchData = arr.filter((item)=>{
+        return item.category.toLowerCase().includes(searchvalue)
+    })
+    displayData(searchData)
+}
+
+
+// ----------displaydata --------- >
     let container = document.getElementById("container");
             function displayData(data) {
                 container.innerHTML = "";
@@ -253,24 +250,48 @@
 
                     let btn = document.createElement("button")
                     btn.innerText = "Add To Cart";
-                    btn.addEventListener("click" ,()=>{
+                    btn.addEventListener("click",()=>{
                         setItem(item)
-                        alert("add to fav ")
+                        updateData()
+                        alert("add to favrouite")
                     })
+
 
                     div.append(id,image,description,category,price,rating,price,btn);
                     container.append(div);
                 });
             }
 
-    function setItem(data){
-        let cart = JSON.parse(localStorage.getItem("cartData")) || [];
-        cart.push(data);
-        localStorage.setItem("cartData", JSON.stringify(cart))
 
-        cartCounter++;
-            updateCartCounter();
+            function setItem(data){
+                let cart = JSON.parse(localStorage.getItem("cartData01")) || []
+                cart.push(data);
+                localStorage.setItem("cartData01",JSON.stringify(cart))
+            }
+
+        const    updateData =()=>{
+            let update1 = document.getElementById("cartIcon")
+            count++
+            update1.innerText = `🛒 ${count}`
+        }
+
+
+getValue()
+
+
+let cou = document.getElementById("count");
+let value =0;
+let interval = setInterval(() => {
+   value++
+   cou.innerHTML = value+" k"
+      if (value >= 100) {
+        clearInterval(interval); // Clear the interval to stop further execution
     }
-        </script>
-    </body>
+}, 100);
+
+
+
+
+</script>
+</body>
 </html>
