@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            #container {
+                border: 1px solid green;
+                width: 60%;
+                margin: auto;
+
+                /* display: flex; */
+                justify-content: space-between;
+                /* flex-direction: column; */
+            }
+                .main_card{
+                border: 5px solid yellow;
+                    display: flex;
+                justify-content: space-around;
+                width: 90%;
+                margin: auto;
+            }
+            .card1 {
+                border: 1px solid red;
+                /* padding: 20px; */
+                text-align: center;
+width: 30%;
+            }
+            .card2 {
+                border: 1px solid rgb(0, 242, 255);
+width: 30%;
+
+            }
+            #qty_btn {
+                width: 80%;
+                margin: auto;
+                /* border: 1px solid gray; */
+                display: flex;
+                justify-content: space-around;
+            }
+            #qty_btn button {
+                padding: 10px;
+            }
+            .card1 img{
+width: 20%;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <!-- <div class="card1">
+                <div class="image_div">
+                    <div class="pro_img">
+                        <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHQGdaIn7hjn3NWLZximOTni6fG_N6kk9Ban6KhTLtfA&s"
+                            alt="" />
+                    </div>
+                    <div id="qty_btn">
+                        <button>-</button>
+                        <button>0</button>
+                        <button>+</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card2"></div>
+        </div> -->
+    </body>
+    <script>
+        let cartValue = JSON.parse(localStorage.getItem("cart")) || [];
+        let container = document.getElementById("container");
+        function displayData(data) {
+            container.innerHTML = "";
+            data.map((item, index) => {
+                let main_card = document.createElement("div");
+                // <----------part1------->
+                let div_1 = document.createElement("div");
+                let image = document.createElement("img");
+                image.src = item.image;
+                let btn_div = document.createElement("div");
+                let button1 = document.createElement("button");
+                button1.innerText = "-";
+                let button2 = document.createElement("button");
+                button2.innerText = 0;
+                let button3 = document.createElement("button");
+                button3.innerText = "+";
+                btn_div.append(button1, button2, button3);
+                div_1.append(image, btn_div);
+                div_1.classList.add("card1");
+
+                // <-------------part2------------>
+                let div_2 = document.createElement("div");
+
+                let title = document.createElement("p");
+                title.innerText = item.title;
+
+                let description = document.createElement("p");
+                description.innerText =
+                    item.description.split(" ").slice(0, 5).join(" ") +
+                    "..............";
+
+                let category = document.createElement("p");
+                category.innerText = item.category;
+
+                let price = document.createElement("p");
+                price.innerText = item.price;
+
+                div_2.append(title, description, price, category);
+                div_1.classList.add("card2");
+
+
+                // let btn = document.createElement("button");
+                // btn.innerText = "Checkout";
+                // btn.addEventListener("click", () => {
+                //     window.location.href = "./checkout.html";
+                // });
+                // let btn2 = document.createElement("button");
+                // btn2.innerText = "Remove";
+                // btn2.addEventListener("click", () => {
+                //     deleteCart(cartValue, index);
+                //     updateCartQuantity();
+                //     window.location.reload();
+                //     alert("deleted");
+                // });
+
+                main_card.append(div_1, div_2);
+                main_card.classList.add("main_card")
+                container.append(main_card);
+            });
+        }
+        displayData(cartValue);
+        function updateCartQuantity() {
+            cartData = JSON.parse(localStorage.getItem("cart")) || [];
+            let cart = document.getElementById("cart");
+            cart.innerText = `🛒:${cartData.length}`;
+        }
+        updateCartQuantity();
+        // <----------Delete----->
+        function deleteCart(data, index) {
+            data.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(data));
+        }
+    </script>
+</html>

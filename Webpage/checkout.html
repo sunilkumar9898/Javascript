@@ -100,7 +100,7 @@
                 <input type="search" placeholder="Search" />
                 <button class="btn_cart">
                     <!-- <a link="" id="cart"><a> -->
-                    <a id="cart" href="./cart1.html">🛒:0</a>
+                    <a id="cart" href="./cart.html">🛒:0</a>
                 </button>
             </div>
         </nav>
@@ -136,19 +136,9 @@
                 let title = document.createElement("p");
                 title.innerText = item.title;
 
-                let btn = document.createElement("button");
-                btn.innerText = "Checkout";
-                btn.addEventListener("click", () => {
-                window.location.href = "./checkout.html"
-                });
-                let btn2 = document.createElement("button");
-                btn2.innerText = "Remove";
-                btn2.addEventListener("click", () => {
-                    deleteCart(cartValue, index);
-                    updateCartQuantity();
-                    window.location.reload()
-                    alert("deleted");
-                });
+
+
+
 
                 div.append(
                     id,
@@ -158,8 +148,7 @@
                     price,
                     rating,
                     price,
-                    btn,
-                    btn2
+                
                 );
                 container.append(div);
             });
