@@ -1,12 +1,6 @@
 {
   "data": [
     {
-      "id": "34a4",
-      "name": "Manjeet ",
-      "email": "webdevlopersunil1997@gmail.com",
-      "city": "kota"
-    },
-    {
       "id": "0af3",
       "name": "ramu singh",
       "email": "webdevlopersunil1997@gmail.com",
@@ -32,12 +26,6 @@
     },
     {
       "id": "b582",
-      "name": "ramu singh",
-      "email": "webdevlopersunil1997@gmail.com",
-      "city": "Jaipur"
-    },
-    {
-      "id": "3dfe",
       "name": "ramu singh",
       "email": "webdevlopersunil1997@gmail.com",
       "city": "Jaipur"

@@ -92,7 +92,7 @@
             <div class="search_bar">
                 <input type="search" placeholder="Search" />
                 <button class="btn_cart">
-                    <a id="cart" href="./cart1.html">🛒:0</a>
+                    <a id="cart" href="./cart.html">🛒:0</a>
                 </button>
             </div>
         </nav>
@@ -181,7 +181,7 @@
                 }
             }
 
-            // <-----------Update Cart Quantity------>
+            // <-----------Update Cart Quantity bag------>
             function updateCartQuantity() {
                 cartData = JSON.parse(localStorage.getItem("cart")) || [];
                 let cart = document.getElementById("cart");

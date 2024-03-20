@@ -148,7 +148,7 @@
                     price,
                     rating,
                     price,
-                
+
                 );
                 container.append(div);
             });
@@ -160,6 +160,9 @@
             cart.innerText = `🛒:${cartData.length}`;
         }
         updateCartQuantity();
+
+
+        
         // <----------Delete----->
         function deleteCart(data, index) {
             data.splice(index, 1);

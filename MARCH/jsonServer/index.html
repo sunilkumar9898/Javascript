@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <style>
+            #container{
+                display: grid;
+                grid-template-columns: repeat(5,1fr);
+                gap: 20px;
+                text-align: center;
+            }
+            #container div{
+                border: 1px solid gray;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container" id="container"></div>
+    </body>
+    <script>
+        async function getValue() {
+            try {
+                let res = await axios.get("https://fair-gray-dove-kilt.cyclic.app/data");
+                arr = res.data;
+                console.log(arr);
+                displayData(arr);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getValue();
+        let container = document.getElementById("container");
+        function displayData(data) {
+            container.innerHTML = "";
+            data.map((item) => {
+                let div = document.createElement("div");
+                let name = document.createElement("p");
+                name.innerText = item.name;
+
+                let mob = document.createElement("p");
+                mob.innerText = item.mob;
+
+                let city = document.createElement("p");
+                city.innerText = item.city;
+
+                div.append(name, mob, city);
+                container.append(div);
+            });
+        }
+    </script>
+</html>

@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "json-server": "^1.0.0-alpha.23"
+  },"scripts": {
+    "server":"json-server --watch product.json --port 8080"
+  }
+}

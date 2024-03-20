@@ -50,7 +50,6 @@
                 }
             }
 
-
             // ----------------filter--------------------------
             let filterV = document.getElementById("filter");
             filterV.addEventListener("change", filterFunction);
@@ -69,28 +68,27 @@
 
             // -------------sort--------------------
             let sort = document.getElementById("sort");
-            sort.addEventListener("change",sortFunction)
+            sort.addEventListener("change", sortFunction);
 
-            function sortFunction(){
-                let sortVlaue = document.getElementById("sort").value
+            function sortFunction() {
+                let sortVlaue = document.getElementById("sort").value;
                 console.log(sortVlaue);
 
-            if(sortVlaue==""){
-                displayData(arr)
-            }
-            else{
-                let sortData;
-                if(sortVlaue=="LTH"){
-                    sortData = arr.slice().sort((a,b)=>{
-                        return    a.price - b.price
-                    })
-                }else if(sortVlaue=="HTL"){
-                        sortData = arr.slice().sort((a,b)=>{
-                    return    b.price - a.price
-                    })
+                if (sortVlaue == "") {
+                    displayData(arr);
+                } else {
+                    let sortData;
+                    if (sortVlaue == "LTH") {
+                        sortData = arr.slice().sort((a, b) => {
+                            return a.price - b.price;
+                        });
+                    } else if (sortVlaue == "HTL") {
+                        sortData = arr.slice().sort((a, b) => {
+                            return b.price - a.price;
+                        });
+                    }
+                    displayData(sortData);
                 }
-                displayData(sortData)
-            }
             }
 
             let container = document.getElementById("content");

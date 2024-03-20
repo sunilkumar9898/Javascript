@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+
+        <style>
+            #container {
+                width: 50%;
+                margin: 20px auto;
+            }
+
+            #container .div_section {
+                padding: 15px;
+                text-align: center;
+                border: 1px solid gray;
+                margin-top: 10px;
+            }
+            #container div img {
+                width: 10%;
+                /* display: flex;
+            justify-content: center; */
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+    </body>
+    <script>
+        let cartData = JSON.parse(localStorage.getItem("cart")) || [];
+        console.log(cartData);
+
+        let container = document.getElementById("container");
+
+        function displayData(data) {
+            data.map((item) => {
+                let div = document.createElement("div");
+                div.classList.add("div_section");
+                let cat = document.createElement("p");
+                cat.innerText = item.category;
+
+                let id = document.createElement("p");
+                id.innerText = item.id;
+
+                let description = document.createElement("p");
+                description.innerText = item.description;
+                let img = document.createElement("img");
+                img.src = item.image;
+
+                let price = document.createElement("h3")
+                price.innerText = `Price : - ${item.price}`
+
+                let div1 = document.createElement("div");
+
+                let btn = document.createElement("button");
+                btn.innerText = "-";
+
+                let quantity = document.createElement("button");
+                quantity.innerText = "0";
+
+                let plusbtn = document.createElement("button");
+                plusbtn.innerText = "+";
+
+
+                
+                div1.append(btn, quantity, plusbtn);
+                div.append(id, cat, description, img,price, div1);
+                container.append(div);
+            });
+        }
+
+        displayData(cartData);
+    </script>
+</html>

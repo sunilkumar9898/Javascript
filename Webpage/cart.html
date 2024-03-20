@@ -5,176 +5,194 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <style>
-            nav {
-                display: flex;
-                justify-content: space-between;
-                /* border: 1px solid green; */
-                /* padding: 10px; */
-                background-color: black;
-                color: white;
-                align-items: center;
-                position: sticky;
-                top: 0;
-            }
-            nav img {
-                width: 20%;
-                padding: 5px;
-            }
-            .search_bar {
-                width: 20%;
-                display: flex;
-
-                justify-content: space-evenly;
-            }
-            .search_bar button {
-                width: 20%;
-                padding: 10px;
-                background-color: yellow;
-            }
-            .search_bar input {
-                height: 40px;
-                margin-top: 10px;
-            }
-            .nav_link {
-                display: flex;
-                justify-content: space-between;
-                /* border: 1px solid green; */
-                width: 30%;
-            }
-            a {
-                text-decoration: none;
-                color: white;
-            }
-            .btn_cart {
-                padding: 5px;
-            }
             #container {
-                display: grid;
-                grid-template-columns: repeat(5, 1fr);
-                gap: 20px;
+                /* border: 1px solid green; */
+                width: 70%;
+                margin: auto;
+                padding: 20px;
+                /* display: flex; */
+                justify-content: space-between;
+                /* flex-direction: column; */
             }
-            #container div {
-                text-align: center;
-                padding: 10px;
+
+            .main_card {
+                /* border: 1px solid yellow; */
+
+                display: flex;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                justify-content: space-around;
+                width: 90%;
+                margin: 20px auto;
             }
-            #container div img {
+
+            .card1 {
+                /* border: 1px solid red; */
+                padding: 20px;
+                text-align: center;
+                width: 40%;
+            }
+
+            .card2 {
+                /* border: 1px solid rgb(0, 242, 255); */
+                padding: 20px;
+                width: 60%;
+            }
+
+            #qty_btn {
+                width: 80%;
+                margin: auto;
+                /* border: 1px solid gray; */
+                display: flex;
+                justify-content: space-around;
+            }
+
+            #qty_btn button {
+                padding: 10px;
+            }
+
+            .card1 img {
                 width: 50%;
             }
-            #cart {
+
+            .remove,
+            .checkout {
+                background-color: whitesmoke;
+                border: none;
+                padding: 10px;
                 color: red;
-                font-weight: bold;
-            }
-            button {
-                background-color: aqua;
-                margin: 10px;
-                padding: 5px;
-                border: none;
-                border-radius: 5px;
-            }
-            button:nth-child(3) {
-                background-color: rgb(255, 0, 25);
-                margin: 10px;
-                padding: 5px;
-                border: none;
-                border-radius: 5px;
+                cursor: pointer;
+                margin: 30px;
             }
         </style>
     </head>
+
     <body>
-        <nav>
-            <div>
-                <a href="./index.html">
-                    <img
-                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHQGdaIn7hjn3NWLZximOTni6fG_N6kk9Ban6KhTLtfA&s"
-                        alt=""
-                /></a>
-            </div>
-            <div class="nav_link">
-                <a href="">Home</a>
-                <a href="">About</a>
-                <a href="">Services</a>
-                <a href="">Contact</a>
-            </div>
-            <div class="search_bar">
-                <input type="search" placeholder="Search" />
-                <button class="btn_cart">
-                    <!-- <a link="" id="cart"><a> -->
-                    <a id="cart" href="./cart1.html">🛒:0</a>
-                </button>
-            </div>
-        </nav>
+        <h1 id="total">0</h1>
         <div id="container"></div>
     </body>
+
     <script>
+        let total = document.getElementById("total");
         let cartValue = JSON.parse(localStorage.getItem("cart")) || [];
+
         let container = document.getElementById("container");
+
         function displayData(data) {
+
             container.innerHTML = "";
-            data.map((item, index) => {
-                let div = document.createElement("div");
-                let category = document.createElement("p");
-                category.innerText = item.category;
+            data.forEach((item, index) => {
+            
+                if (!item.quantity) {
+                    item.quantity = 1; // Set default quantity to 1 if not initialized
+                }
+
+                let main_card = document.createElement("div");
+                // <----------part1------->
+                let div_1 = document.createElement("div");
+                let image = document.createElement("img");
+                image.src = item.image;
+
+                let btn_div = document.createElement("div");
+
+                // <-----------decrement button--->
+
+                let button1 = document.createElement("button");
+                button1.innerText = "-";
+
+                button1.addEventListener("click", () => {
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                        if (item.quantity === 1) {
+                            button1.disabled = true;
+                        }
+                        button2.innerText = item.quantity;
+                        localStorage.setItem("cart", JSON.stringify(cartValue));
+                        displayData(cartValue);
+                    }
+                });
+
+                let button2 = document.createElement("button");
+                button2.innerText = item.quantity;
+    // <-----------Increment button--->
+                let button3 = document.createElement("button");
+                button3.innerText = "+";
+
+                button3.addEventListener("click", () => {
+                    item.quantity++;
+                    button2.innerText = item.quantity;
+
+                    localStorage.setItem("cart", JSON.stringify(cartValue));
+                    displayData(cartValue);
+                });
+
+                btn_div.append(button1, button2, button3);
+                div_1.append(image, btn_div);
+                div_1.classList.add("card1");
+
+                // <-------------part2------------>
+                let div_2 = document.createElement("div");
+
+                let title = document.createElement("p");
+                title.innerText = item.title;
 
                 let description = document.createElement("p");
                 description.innerText =
                     item.description.split(" ").slice(0, 5).join(" ") +
                     "..............";
 
-                let id = document.createElement("p");
-                id.innerText = item.id;
-
-                let image = document.createElement("img");
-                image.src = item.image;
+                let category = document.createElement("p");
+                category.innerText = item.category;
 
                 let price = document.createElement("p");
-                price.innerText = item.price;
 
-                let rating = document.createElement("p");
-                rating.innerText = item.rating.rate;
-
-                let title = document.createElement("p");
-                title.innerText = item.title;
-
-                let btn = document.createElement("button");
-                btn.innerText = "Checkout";
-                btn.addEventListener("click", () => {
-                window.location.href = "./checkout.html"
-                });
-                let btn2 = document.createElement("button");
-                btn2.innerText = "Remove";
-                btn2.addEventListener("click", () => {
+                price.innerText = "price:- $" + item.price * item.quantity;
+                let remove = document.createElement("button");
+                remove.innerText = "Remove";
+                remove.classList.add("remove");
+                remove.addEventListener("click", () => {
                     deleteCart(cartValue, index);
-                    updateCartQuantity();
-                    window.location.reload()
+
                     alert("deleted");
                 });
-
-                div.append(
-                    id,
-                    image,
+                let checkout = document.createElement("button");
+                checkout.innerText = "checkout";
+                checkout.classList.add("checkout");
+                checkout.addEventListener("click", () => {
+                    window.location.href = "./payment.html";
+                });
+                div_2.append(
+                    title,
                     description,
+                    price,
                     category,
-                    price,
-                    rating,
-                    price,
-                    btn,
-                    btn2
+                    remove,
+                    checkout
                 );
-                container.append(div);
+                div_2.classList.add("card2");
+
+                main_card.append(div_1, div_2);
+                main_card.classList.add("main_card");
+                container.append(main_card);
             });
+// <-------------total Amount-----------
+            let sum = 0;
+            for (let i = 0; i < cartValue.length; i++) {
+                sum += cartValue[i].price * cartValue[i].quantity;
+            }
+            total.innerText = sum;
         }
+
         displayData(cartValue);
-        function updateCartQuantity() {
-            cartData = JSON.parse(localStorage.getItem("cart")) || [];
-            let cart = document.getElementById("cart");
-            cart.innerText = `🛒:${cartData.length}`;
+
+        function updatePrice(element, item) {
+            element.innerText = "price:- $" + item.price * item.quantity;
         }
-        updateCartQuantity();
+
         // <----------Delete----->
         function deleteCart(data, index) {
             data.splice(index, 1);
             localStorage.setItem("cart", JSON.stringify(data));
+            displayData(data); // Update the display after deleting
         }
     </script>
 </html>

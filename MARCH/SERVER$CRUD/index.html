@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Crud & Json Server</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                display: flex;
+                width: 95%;
+                margin: 50px auto;
+                justify-content: space-between;
+                gap: 40px;
+            }
+
+            .form {
+                width: 100%;
+                /* background-color: red; */
+            }
+            form {
+                width: 100%;
+            }
+
+            input {
+                width: 90%;
+                padding: 10px;
+                border-radius: 8px;
+            }
+            button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 8px 15px;
+            }
+
+            .displayData {
+                width: 50%;
+                /* background-color: forestgreen; */
+            }
+            table {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <form class="form">
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter Name" /><br /><br />
+                    <input
+                        type="text"
+                        id="email"
+                        placeholder="Enter Email" /><br /><br />
+                    <input
+                        type="text"
+                        id="city"
+                        placeholder="Enter City" /><br /><br />
+                    <button type="submit" id="sbmt">Submit</button>
+                </form>
+            </div>
+            <div class="displayData">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>City</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            let url = "http://localhost:8000/data";
+            let form = document.querySelector("form");
+
+            async function postData() {
+                let obj = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    city: document.getElementById("city").value,
+                };
+                try {
+                    let res = await axios.post(url, obj);
+                    console.log(res);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            async function getdata() {
+                try {
+                    let ersponce = await axios.get(url);
+                    DisplayData(ersponce.data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            async function deleteData(id) {
+                try {
+                    let deldata = await axios.delete(`${url}/${id}`);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            let userId = null;
+
+            async function getRowData(data) {
+            userId = data.id;
+                document.getElementById("name").value = data.name;
+                document.getElementById("email").value = data.email;
+                document.getElementById("city").value = data.city;
+                document.getElementById("sbmt").innerHTML = "Save";
+                console.log(userId,"132");
+            }
+
+            async function UpdatedData() {
+                let obj = {
+                    name: document.getElementById("name").value,
+                    email: document.getElementById("email").value,
+                    city: document.getElementById("city").value,
+                };
+                try {
+                    let resp = await axios.patch(`${url}/${userId}`, obj);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                if (userId) {
+                    UpdatedData();
+                } else {
+                    postData();
+                }
+            });
+
+            getdata();
+
+            let tbody = document.getElementById("tbody");
+            function DisplayData(data) {
+                tbody.innerHTML = "";
+                data.map((item) => {
+                    let tr = document.createElement("tr");
+
+                    let name = document.createElement("td");
+                    name.innerText = item.name;
+
+                    let email = document.createElement("td");
+                    email.innerText = item.email;
+
+                    let city = document.createElement("td");
+                    city.innerText = item.city;
+
+                    let btn = document.createElement("td");
+                    let buttn = document.createElement("button");
+                    let updated = document.createElement("button");
+                    updated.innerHTML = '<i class="fas fa-edit"></i>';
+                    updated.addEventListener("click", () => {
+                        getRowData(item);
+                    });
+
+                    buttn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+                    buttn.addEventListener("click", () => {
+                        deleteData(item.id);
+                    });
+
+                    btn.append(buttn, updated);
+                    tr.append(name, email, city, btn);
+                    tbody.append(tr);
+                });
+            }
+        </script>
+
+        <!-- <script>
+    let userId = null;
+    let url = "http://localhost:8000/data"
+    let form = document.querySelector("form");
+
+    async function postData() {
+        let obj = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            city: document.getElementById("city").value,
+        }
+        try {
+            let res = await axios.post(url, obj);
+            console.log(res);
+            // getdata();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function getdata() {
+        try {
+            let response = await axios.get(url);
+            DisplayData(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function deleteData(id) {
+        try {
+            let deldata = await axios.delete(`${url}/${id}`);
+            // getdata();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function getRowData(data) {
+        userId = data.id;
+        document.getElementById("name").value = data.name;
+        document.getElementById("email").value = data.email;
+        document.getElementById("city").value = data.city;
+        document.getElementById("sbmt").innerHTML = "Save";
+    }
+
+    async function UpdatedData() {
+        let obj = {
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            city: document.getElementById("city").value,
+        }
+        try {
+            let resp = await axios.patch(`${url}/${userId}`, obj);
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (userId) {
+            UpdatedData();
+        } else {
+            postData();
+        }
+    });
+
+    getdata();
+
+    let tbody = document.getElementById("tbody");
+    function DisplayData(data) {
+        tbody.innerHTML = "";
+        data.map((item) => {
+            let tr = document.createElement("tr");
+
+            let name = document.createElement("td");
+            name.innerText = item.name;
+
+            let email = document.createElement("td");
+            email.innerText = item.email;
+
+            let city = document.createElement("td");
+            city.innerText = item.city;
+
+            let btn = document.createElement("td");
+            let buttn = document.createElement("button");
+            let updated = document.createElement("button");
+            updated.innerHTML = '<i class="fas fa-edit"></i>';
+            updated.addEventListener("click", () => {
+                getRowData(item);
+            });
+
+            buttn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+            buttn.addEventListener("click", () => {
+                deleteData(item.id);
+            });
+
+            btn.append(buttn, updated);
+            tr.append(name, email, city, btn);
+            tbody.append(tr);
+        });
+    }
+</script> -->
+    </body>
+</html>

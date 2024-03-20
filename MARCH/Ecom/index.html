@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <nav>
+            <div>
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHQGdaIn7hjn3NWLZximOTni6fG_N6kk9Ban6KhTLtfA&s"
+                    alt="" />
+            </div>
+            <div class="search_bar">
+                <input type="search" placeholder="Search" />
+                <button class="btn_cart">
+                    <a id="cart" href="./cart.html">🛒:0</a>
+                </button>
+            </div>
+        </nav>
+        <div id="container"></div>
+    </body>
+    <script>
+        let container = document.getElementById("container");
+        let cartData = JSON.parse(localStorage.getItem("cart")) || [];
+        async function getData() {
+            try {
+                let res = await fetch("https://fakestoreapi.com/products");
+                let data = await res.json();
+                console.log(data);
+                displayData(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getData();
+
+        // <----------Add to Cart----------->
+        function addToCart(data) {
+            let arr = JSON.parse(localStorage.getItem("cart")) || [];
+            arr.push(data);
+            localStorage.setItem("cart", JSON.stringify(arr));
+            alert("Added in Cart");
+        }
+
+        // For Cart Quantiy Updataion
+        function updateCartQuantity() {
+            cartData = JSON.parse(localStorage.getItem("cart")) || [];
+           let cart = document.getElementById("cart");
+
+            cart.innerText = `🛒${cartData.length}`;
+        }
+        updateCartQuantity();
+
+        function displayData(data) {
+            container.innerHTML = "";
+            data.forEach((item) => {
+                let div = document.createElement("div");
+                let category = document.createElement("p");
+                category.innerText = item.category;
+
+                let description = document.createElement("p");
+                description.innerText =
+                    item.description.split(" ").slice(0, 5).join(" ") +
+                    "..............";
+
+                let id = document.createElement("p");
+                id.innerText = item.id;
+
+                let image = document.createElement("img");
+                image.src = item.image;
+
+                let price = document.createElement("p");
+                price.innerText = item.price;
+
+                let rating = document.createElement("p");
+                rating.innerText = item.rating.rate;
+
+                let title = document.createElement("p");
+                title.innerText = item.title;
+
+                let btn = document.createElement("button");
+                btn.innerText = "Add To Cart";
+                btn.addEventListener("click", () => {
+                    addToCart(item);
+                    updateCartQuantity();
+                });
+
+                div.append(
+                    id,
+                    image,
+                    description,
+                    category,
+                    price,
+                    rating,
+                    price,
+                    btn
+                );
+                container.append(div);
+            });
+        }
+    </script>
+</html>
