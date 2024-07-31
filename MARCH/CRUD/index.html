@@ -186,7 +186,7 @@
 
         <script>
             let userId = null;
-            let url = "http://localhost:8080/data";
+            let url = "https://long-rose-trout-robe.cyclic.app/data";
             let form = document.querySelector("form");
 
 
@@ -257,7 +257,7 @@
                 try {
                     let res = await axios.patch(`${url}/${userId}`,obj);
                         // await getData();
-                alert("Success: Data submitted successfully.");
+
 
                 } catch (error) {
                     console.log(error);
@@ -268,9 +268,13 @@
         e.preventDefault();
         if(userId){
             UpdatedData()
+                    alert("Success: Data Updated successfully.");
+            window.location.reload()
         }else{
 
         postData()
+                alert("Success: Data submitted successfully.");
+            window.location.reload()
 
 
         }
@@ -280,8 +284,9 @@
 
     async function deletedat(id){
         try {
-            let delData = await axios.delete(`http://localhost:8080/data/${id}`)
-            alert("data delted")
+            let delData = await axios.delete(`https://long-rose-trout-robe.cyclic.app/data/${id}`)
+
+                getData()
         } catch (error) {
             console.log(error);
         }
@@ -316,6 +321,8 @@
                     buttn.innerHTML = '<i class="fas fa-trash-alt"></i>';
                     buttn.addEventListener("click",(id)=>{
                         deletedat(item.id)
+                            alert("data delted")
+            window.location.reload()
                     })
                     btn.append(buttn,updated)
 
@@ -325,7 +332,7 @@
                     tbody.append(tr)
                 })
             }
-        
+
 
         </script>
     </body>

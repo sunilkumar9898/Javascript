@@ -22,10 +22,30 @@
                 /* display: flex;
             justify-content: center; */
             }
+            #main {
+                display: flex;
+                justify-content: space-around;
+            }
+            #total,#Order {
+                border: 1px solid green;
+                width: 10%;
+                height: 50px;
+                margin-right: 100px;
+                border-radius: 10px;
+                background-color: rgb(182, 243, 182);
+                color: black;
+                font-weight: bold;
+                margin-top: 100px;
+            }
         </style>
     </head>
     <body>
-        <div id="container"></div>
+        <h1>This is payment page</h1>
+        <div id="main">
+            <div id="container"></div>
+            <button id="total">totay payble Amout:0</button>
+            <button id="Order">Placed Order</button>
+        </div>
     </body>
     <script>
         let cartData = JSON.parse(localStorage.getItem("cart")) || [];
@@ -36,7 +56,6 @@
         function displayData(data) {
             container.innerHTML = "";
             data.forEach((item) => {
-                ///set initinal quatity value
                 if (!item.quantity || item.quantity < 1) {
                     item.quantity = 1;
                 }
@@ -56,43 +75,30 @@
 
                 let div1 = document.createElement("div");
                 let qtbtn = document.createElement("button");
-                qtbtn.innerText = item.quantity;
-                let btn = document.createElement("button");
-                btn.innerText = "-";
-
-                btn.addEventListener("click", () => {
-                    if (item.quantity > 1) {
-                        item.quantity--;
-                        qtbtn.innerText = item.quantity;
-                        displayData(cartData);
-                    }
-                });
+                qtbtn.innerText = `qty-${item.quantity}`;
 
                 let checkout = document.createElement("button");
-                checkout.innerText = "Checkout";
-
+                checkout.innerText = "update cart value";
                 checkout.addEventListener("click", () => {
-                    window.location.href = "./payment.html";
-                });
-
-                let plusbtn = document.createElement("button");
-                plusbtn.innerText = "+";
-                plusbtn.addEventListener("click", () => {
-                    item.quantity++;
-
-                    qtbtn.innerText = item.quantity;
-                    displayData(cartData);
+                    window.location.href = "./cart.html";
                 });
 
                 let price = document.createElement("h3");
-                price.innerText = `Price $: - ${item.price * item.quantity}`;
-                div1.append(btn, qtbtn, plusbtn, checkout);
+                price.innerText = `Price : - ${item.price * item.quantity}`;
+                div1.append(qtbtn, checkout);
                 div.append(id, cat, description, img, price, div1);
                 container.append(div);
             });
-            localStorage.setItem("cart", JSON.stringify(cartData));
         }
 
         displayData(cartData);
+
+        let total = document.getElementById("total");
+
+        let sum = 0;
+        for (let i = 0; i < cartData.length; i++) {
+            sum = sum + cartData[i].price * cartData[i].quantity;
+        }
+        total.innerText = `total Amount $ ${sum}`;
     </script>
 </html>

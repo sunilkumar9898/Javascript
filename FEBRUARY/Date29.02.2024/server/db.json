@@ -1,30 +1,6 @@
 {
   "data": [
     {
-      "id": "0bdf",
-      "name": "gfgfhfhmanjeet SIngh ",
-      "email": "webdevlopersunil1997@gmail.com",
-      "mobile": "9898985225",
-      "city": "Jaipur",
-      "state": "rajasthan "
-    },
-    {
-      "id": "abc0",
-      "name": "Manjeet SIngh ",
-      "email": "PoojaKumari@gmail.com",
-      "mobile": "9898985225",
-      "city": "Jaipur",
-      "state": "rajasthan"
-    },
-    {
-      "id": "6527",
-      "name": "Manjeet SIngh ",
-      "email": "PoojaKumari@gmail.com",
-      "mobile": "9898985225",
-      "city": "Jaipur",
-      "state": "rajasthan"
-    },
-    {
       "id": "f6bb",
       "name": "suresh kumar",
       "email": "webdevlopersunil1997@gmail.com",
@@ -79,14 +55,6 @@
       "mobile": "9898985225",
       "city": "udaipurdtyu",
       "state": "yyuyuyuidy"
-    },
-    {
-      "id": "133d",
-      "name": "edfETRTRT",
-      "email": "ram@gmail.com",
-      "mobile": "9898985225",
-      "city": "Jaipur",
-      "state": "rajasthanTRETET"
     }
   ]
 }

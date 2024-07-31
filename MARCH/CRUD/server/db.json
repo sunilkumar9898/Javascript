@@ -1,34 +1,3 @@
 {
-  "data": [
-    {
-      "id": "0af3",
-      "name": "ramu singh",
-      "email": "webdevlopersunil1997@gmail.com",
-      "city": "Jaipur"
-    },
-    {
-      "id": "fa5d",
-      "name": "ramu singh",
-      "email": "webdevlopersunil1997@gmail.com",
-      "city": "Jaipur"
-    },
-    {
-      "id": "eaca",
-      "name": "ramu singh",
-      "email": "ram@gmail.com",
-      "city": "Jaipur"
-    },
-    {
-      "id": "3bca",
-      "name": "ramu singh",
-      "email": "webdevlopersunil1997@gmail.com",
-      "city": "Lucknow"
-    },
-    {
-      "id": "b582",
-      "name": "ramu singh",
-      "email": "webdevlopersunil1997@gmail.com",
-      "city": "Jaipur"
-    }
-  ]
+  "data": []
 }
